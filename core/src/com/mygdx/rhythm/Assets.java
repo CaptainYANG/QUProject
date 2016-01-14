@@ -1,0 +1,57 @@
+package com.mygdx.rhythm;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import java.awt.TexturePaint;
+
+import jdk.internal.dynalink.beans.StaticClass;
+
+/**
+ * Created by yuyin on 2016/1/12.
+ */
+public class Assets {
+    public static Texture texture_corgi;
+    public static Texture texture_left;
+    public static Texture texture_right;
+    public static Sprite sprite_corgi;
+    public static Sprite sprite_left;
+    public static Sprite sprite_right;
+    public static Skin skin;
+    public static Texture background;
+    public static Texture hit;
+    public static Sprite sprite_back;
+    public static Sprite sprite_hit;
+    public static Music music;
+    public static String[] beatInfo;
+    public static int[] beatTime;
+    public static void load(){
+        texture_corgi = new Texture(Gdx.files.internal("midCorgi.png"));
+        texture_left = new Texture(Gdx.files.internal("leftCorgi.png"));
+        texture_right = new Texture(Gdx.files.internal("rightCorgi.png"));
+        background = new Texture(Gdx.files.internal("sakura.png"));
+        hit = new Texture(Gdx.files.internal("hit.png"));
+        sprite_corgi = new Sprite(texture_corgi);
+        sprite_left = new Sprite(texture_left);
+        sprite_right = new Sprite(texture_right);
+        sprite_back = new Sprite(background);
+        sprite_hit = new Sprite(hit);
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
+        beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
+        beatTime = new int[beatInfo.length];
+        beatTime = getBeatTime(beatInfo);
+    }
+    public static int[] getBeatTime(String[] beatInfo){
+        String[] temp;
+        for(int i=0;i<beatInfo.length;i++){
+            temp = beatInfo[i].split(",");
+            beatTime[i] = Integer.parseInt(temp[0]);
+        }
+        return beatTime;
+    }
+}
