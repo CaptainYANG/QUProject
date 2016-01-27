@@ -20,7 +20,7 @@ public class MenuScreen implements Screen{
     RhythmGame rhythmGame;
     MenuScreen menuScreen;
     SpriteBatch batch;
-    boolean touchIsEnabled = true;
+    boolean touchIsEnabled;
     Stage stage = new Stage();
     private TextButton recommend = new TextButton("Recommend", Assets.skin);
     private TextButton myMusic = new TextButton("My Music", Assets.skin);
@@ -56,7 +56,8 @@ public class MenuScreen implements Screen{
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new SettingScreen(menuScreen));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new SettingScreen(rhythmGame));
+
             }
         });
         /**

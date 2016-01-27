@@ -2,6 +2,7 @@ package com.mygdx.rhythm;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,17 +19,17 @@ import javafx.scene.control.ToggleButton;
  * Created by yuyin on 2016/1/27.
  */
 public class SettingScreen implements Screen{
-    MenuScreen menuScreen;
+    RhythmGame rhythmGame;
     private Stage stage = new Stage();
     private SpriteDrawable buttonOn = new SpriteDrawable(Assets.sprite_buttonOn);
     private SpriteDrawable buttonOff = new SpriteDrawable(Assets.sprite_buttonOff);
-    private ImageButton touchEnable = new ImageButton(buttonOn);
+    private ImageButton touchEnable = new ImageButton(buttonOn,buttonOff,buttonOff);
     private TextButton ok = new TextButton("OK", Assets.skin);
     private Label enableTouch = new Label("Use touch to play", Assets.skin);
     private boolean touch = true;
 
-    public SettingScreen(MenuScreen menuScreen) {
-        this.menuScreen = menuScreen;
+    public SettingScreen(RhythmGame rhythmGame) {
+        this.rhythmGame = rhythmGame;
     }
 
     @Override
@@ -36,28 +37,30 @@ public class SettingScreen implements Screen{
         touchEnable.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if(touch){
-                    touchEnable.setBackground(buttonOff);
                     touch = false;
                 }else{
-                    touchEnable.setBackground(buttonOn);
                     touch = true;
                 }
             }
         });
         ok.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                menuScreen.touchIsEnabled = touch;
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new SettingScreen(menuScreen));
+                rhythmGame.touchIsEnabled = touch;
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
             }
         });
         touchEnable.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
         touchEnable.setPosition(stage.getWidth() * 0.4f, stage.getHeight() * 0.50f);
         enableTouch.setPosition(stage.getWidth() * 0.2f, stage.getHeight() * 0.50f);
         ok.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        ok.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.50f);
+        ok.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.20f);
         stage.addActor(enableTouch);
         stage.addActor(touchEnable);
         stage.addActor(ok);
+        InputMultiplexer impx = new InputMultiplexer();
+        impx.addProcessor(stage);
+        Gdx.input.setInputProcessor(impx);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
