@@ -1,10 +1,6 @@
 package com.mygdx.rhythm;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class RhythmGame extends Game {
@@ -19,14 +15,26 @@ public class RhythmGame extends Game {
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen) ;
 	}
+	public void setKnock(boolean knock){
+		this.knock = knock;
+	}
+	public boolean isKnock() {
+		return knock;
+	}
 
+	public float getLastUpdate() {
+		return lastUpdate;
+	}
 
-	public boolean hasKnocked () {
-		//currentTime = System.currentTimeMillis();
-		if (Math.abs(currentTime - lastUpdate)<400){
-			if (knock) {return true;}
-		}
+	public float getCurrentTime() {
+		return currentTime;
+	}
 
-		return false;
+	public void setCurrentTime(float currentTime) {
+		this.currentTime = currentTime;
+	}
+
+	public void setLastUpdate(float lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 }

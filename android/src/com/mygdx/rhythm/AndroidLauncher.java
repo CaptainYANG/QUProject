@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.rhythm.RhythmGame;
-
 
 
 public class AndroidLauncher extends AndroidApplication implements SensorEventListener {
 
 	private SensorManager senSensorManager;
 	private Sensor senAccelerometer;
-	private RhythmGame Ourgame = new RhythmGame();
+	private RhythmGame ourGame = new RhythmGame();
 	private long lastUpdate = 0;
 	private float last_x, last_y, last_z;
 	private static final int SHAKE_THRESHOLD = 150;
@@ -28,7 +26,7 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 
-		initialize(Ourgame, config);
+		initialize(ourGame, config);
 		senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -52,15 +50,13 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 				float speed = Math.abs(z - last_z)/ diffTime * 10000;
 
 				if (speed > SHAKE_THRESHOLD) {
-
-					Toast.makeText(AndroidLauncher.this, "knock",
-							Toast.LENGTH_LONG).show();
-					//System.out.println("Knock!Knock!");
-					Ourgame.knock = true;
+//					Toast.makeText(AndroidLauncher.this, "knock",
+//							Toast.LENGTH_LONG).show();
+					ourGame.setKnock(true);
 
 				}
 				else {
-					Ourgame.knock = false;
+					ourGame.setKnock(false);
 				}
 
 				//last_x = x;

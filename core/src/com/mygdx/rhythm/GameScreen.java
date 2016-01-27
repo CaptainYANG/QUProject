@@ -36,15 +36,13 @@ public class GameScreen implements Screen{
         batch.begin();
         batch.draw(Assets.background, 0, 0, width, height);
         currentTime =  Assets.music.getPosition()*1000;
-        rhythmGame.currentTime = currentTime;
+        rhythmGame.setCurrentTime(currentTime);
         if(Math.abs(currentTime-beatTime[beatIndex])<=200){
             batch.draw(Assets.hit, 10, 10);
-            rhythmGame.lastUpdate = beatTime[beatIndex];
-
+            rhythmGame.setLastUpdate(beatTime[beatIndex]);
         }else if(currentTime-beatTime[beatIndex]>200){
             beatIndex++;
         }
-
 
         if(touchIsenabled){
             if(touch) {
@@ -64,8 +62,7 @@ public class GameScreen implements Screen{
             }
             touch = false;
         }else{
-
-            if(rhythmGame.knock){
+            if(rhythmGame.isKnock()){
                 batch.draw(Assets.sprite_right,(width-Assets.sprite_right.getWidth())/2,height/2-Assets.sprite_right.getHeight()/2);
             }else {
                 batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
@@ -77,16 +74,11 @@ public class GameScreen implements Screen{
                 e.printStackTrace();
             }
 
-            if (rhythmGame.hasKnocked()){
+            if (rhythmGame.isKnock()){
                 batch.draw(Assets.hit, 100, 100);
-
-                System.out.println("Knock");
             }
 
         }
-
-
-
         if(time<1000){
             time++;
         }else{
