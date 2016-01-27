@@ -11,12 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import javafx.scene.control.ToggleButton;
+
 /**
  * Created by yuyin on 2016/1/13.
  */
 public class MenuScreen implements Screen{
     RhythmGame rhythmGame;
+    MenuScreen menuScreen;
     SpriteBatch batch;
+    boolean touchIsEnabled = true;
     Stage stage = new Stage();
     private TextButton recommend = new TextButton("Recommend", Assets.skin);
     private TextButton myMusic = new TextButton("My Music", Assets.skin);
@@ -25,6 +29,7 @@ public class MenuScreen implements Screen{
     int time = 0;
     public MenuScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
+        this.menuScreen = this;
         batch = new SpriteBatch();
     }
     @Override
@@ -32,6 +37,7 @@ public class MenuScreen implements Screen{
         recommend.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                rhythmGame.setTouchIsEnabled(touchIsEnabled);
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
@@ -50,7 +56,7 @@ public class MenuScreen implements Screen{
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new SettingScreen(menuScreen));
             }
         });
         /**

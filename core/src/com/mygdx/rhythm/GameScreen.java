@@ -26,6 +26,7 @@ public class GameScreen implements Screen{
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
         beatTime = Assets.beatTime;
+        touchIsenabled = rhythmGame.isTouchIsEnabled();
     }
 
     @Override
@@ -67,13 +68,11 @@ public class GameScreen implements Screen{
             }else {
                 batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
             }
-
             try{
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             if (rhythmGame.isKnock()){
                 batch.draw(Assets.hit, 100, 100);
             }

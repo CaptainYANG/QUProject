@@ -8,6 +8,15 @@ public class RhythmGame extends Game {
 	float lastUpdate = 0;
 	float currentTime = 0;
 	boolean knock = false;
+	boolean touchIsEnabled = true;
+
+	public void setTouchIsEnabled(boolean touchIsEnabled) {
+		this.touchIsEnabled = touchIsEnabled;
+	}
+
+	public boolean isTouchIsEnabled() {
+		return touchIsEnabled;
+	}
 
 	@Override
 	public void create () {

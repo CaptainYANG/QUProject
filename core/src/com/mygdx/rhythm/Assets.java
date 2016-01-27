@@ -21,6 +21,8 @@ public class Assets {
     public static Sprite sprite_corgi;
     public static Sprite sprite_left;
     public static Sprite sprite_right;
+    public static Texture buttonOn;
+    public static Texture buttonOff;
     public static Skin skin;
     public static Texture background;
     public static Texture hit;
@@ -29,10 +31,15 @@ public class Assets {
     public static Music music;
     public static String[] beatInfo;
     public static int[] beatTime;
+    public static Sprite sprite_buttonOn;
+    public static Sprite sprite_buttonOff;
+
     public static void load(){
         texture_corgi = new Texture(Gdx.files.internal("midCorgi.png"));
         texture_left = new Texture(Gdx.files.internal("leftCorgi.png"));
         texture_right = new Texture(Gdx.files.internal("rightCorgi.png"));
+        buttonOn = new Texture(Gdx.files.internal("buttonOn.png"));
+        buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         background = new Texture(Gdx.files.internal("sakura.png"));
         hit = new Texture(Gdx.files.internal("hit.png"));
         sprite_corgi = new Sprite(texture_corgi);
@@ -40,6 +47,8 @@ public class Assets {
         sprite_right = new Sprite(texture_right);
         sprite_back = new Sprite(background);
         sprite_hit = new Sprite(hit);
+        sprite_buttonOn = new Sprite(buttonOn);
+        sprite_buttonOff = new Sprite(buttonOff);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
         beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
