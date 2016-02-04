@@ -1,5 +1,5 @@
 LOCAL_PATH := $(call my-dir)
-SUPERPOWERED_PATH := ../../../../../../Superpowered
+SUPERPOWERED_PATH := Superpowered
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := Superpowered
@@ -19,11 +19,13 @@ endif
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)  
-LOCAL_MODULE := FrequencyDomain
+LOCAL_MODULE := MusicToOnset
+
 
 LOCAL_SRC_FILES :=  \
-$(SUPERPOWERED_PATH)/SuperpoweredAndroidAudioIO.cpp  \
-FrequencyDomain.cpp
+	MusicToOnset.cpp \
+	$(SUPERPOWERED_PATH)/SuperpoweredAndroidAudioIO.cpp  \
+
 LOCAL_C_INCLUDES += $(SUPERPOWERED_PATH)
 
 LOCAL_LDLIBS := -llog -landroid -lOpenSLES 

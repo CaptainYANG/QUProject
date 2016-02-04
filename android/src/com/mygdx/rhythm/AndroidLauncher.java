@@ -5,11 +5,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+
+import java.io.File;
 
 
 public class AndroidLauncher extends AndroidApplication implements SensorEventListener {
@@ -30,7 +34,35 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+		// Get the device's sample rate and buffer size to enable low-latency Android audio output, if available.
+		String samplerateString = null, buffersizeString = null;
+		if (Build.VERSION.SDK_INT >= 17) {
+			AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+			samplerateString = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+			buffersizeString = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
+		}
+		if (samplerateString == null) samplerateString = "44100";
+		if (buffersizeString == null) buffersizeString = "512";
+
+		System.loadLibrary("MusicToOnset");
+		float[] haveResults;
+
+		File musicfile = new File("/assets/mylove.mp3");
+		System.out.println(musicfile.getAbsolutePath());
+
+		haveResults = MusicToOnset(musicfile.getAbsolutePath());
+		//System.out.printf("bpm:"+haveResults[0] +",startMs:"+haveResults[1]);
+
+		//System.loadLibrary("FrequencyDomain");
+		//FrequencyDomain(Integer.parseInt(samplerateString), Integer.parseInt(buffersizeString));
 	}
+
+
+
+	private native float[] MusicToOnset(String music);
+
+	//private native void FrequencyDomain(long samplerate, long buffersize);
 
 	@Override
 	public void onSensorChanged(SensorEvent sensorEvent) {
@@ -80,5 +112,8 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		super.onResume();
 		senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 	}
+
+
+
 }
 

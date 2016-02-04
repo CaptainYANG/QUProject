@@ -12,6 +12,8 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
+
+
     version = '1.0'
     ext {
         appName = "Rhythm"
@@ -31,6 +33,7 @@ allprojects {
 
 project(":android") {
     apply plugin: "android"
+
 
     configurations { natives }
 
