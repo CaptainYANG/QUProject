@@ -25,7 +25,7 @@ public class SettingScreen implements Screen{
     private SpriteDrawable buttonOff = new SpriteDrawable(Assets.sprite_buttonOff);
     private ImageButton touchEnable = new ImageButton(buttonOn,buttonOff,buttonOff);
     private TextButton ok = new TextButton("OK", Assets.skin);
-    private Label enableTouch = new Label("Use touch to play", Assets.skin);
+    private Label enableTouch = new Label("Play mode", Assets.skin);
     private boolean touch = true;
 
     public SettingScreen(RhythmGame rhythmGame) {
@@ -45,7 +45,7 @@ public class SettingScreen implements Screen{
         });
         ok.addListener(new ClickListener(){
             public void clicked(InputEvent event, float x, float y) {
-                rhythmGame.touchIsEnabled = touch;
+                rhythmGame.setTouchIsEnabled(touch);
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
             }
         });

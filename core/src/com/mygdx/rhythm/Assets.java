@@ -5,7 +5,9 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import java.awt.TexturePaint;
 
@@ -33,6 +35,8 @@ public class Assets {
     public static int[] beatTime;
     public static Sprite sprite_buttonOn;
     public static Sprite sprite_buttonOff;
+    public static Texture resume;
+    public static Sprite sprite_resume;
 
     public static void load(){
         texture_corgi = new Texture(Gdx.files.internal("midCorgi.png"));
@@ -54,6 +58,8 @@ public class Assets {
         beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
         beatTime = new int[beatInfo.length];
         beatTime = getBeatTime(beatInfo);
+        resume =new Texture(Gdx.files.internal("resume.png"));
+        sprite_resume = new Sprite(resume);
     }
     public static int[] getBeatTime(String[] beatInfo){
         String[] temp;

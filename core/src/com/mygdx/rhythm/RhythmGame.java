@@ -1,6 +1,7 @@
 package com.mygdx.rhythm;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 
 public class RhythmGame extends Game {
@@ -21,6 +22,7 @@ public class RhythmGame extends Game {
 	@Override
 	public void create () {
 		Assets.load();
+		Gdx.input.setCatchBackKey(true);
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen) ;
 	}

@@ -31,6 +31,7 @@ public class MenuScreen implements Screen{
         this.rhythmGame = rhythmGame;
         this.menuScreen = this;
         batch = new SpriteBatch();
+        touchIsEnabled = rhythmGame.isTouchIsEnabled();
     }
     @Override
     public void show() {
