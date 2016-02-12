@@ -37,6 +37,12 @@ public class Assets {
     public static Sprite sprite_buttonOff;
     public static Texture resume;
     public static Sprite sprite_resume;
+    public static Texture recommend;
+    public static Sprite recommend_sprite;
+    public static Texture setting;
+    public static Sprite setting_sprite;
+    public static Texture local;
+    public static Sprite local_sprite;
 
     public static void load(){
         texture_corgi = new Texture(Gdx.files.internal("midCorgi.png"));
@@ -60,6 +66,12 @@ public class Assets {
         beatTime = getBeatTime(beatInfo);
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
+        recommend = new Texture(Gdx.files.internal("recommendation.png"));
+        recommend_sprite = new Sprite(recommend);
+        setting = new Texture(Gdx.files.internal("setting.png"));
+        setting_sprite = new Sprite(setting);
+        local = new Texture(Gdx.files.internal("localmusic.png"));
+        local_sprite= new Sprite(local);
     }
     public static int[] getBeatTime(String[] beatInfo){
         String[] temp;

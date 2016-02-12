@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import javafx.scene.control.ToggleButton;
 
@@ -21,11 +23,15 @@ public class MenuScreen implements Screen{
     MenuScreen menuScreen;
     SpriteBatch batch;
     boolean touchIsEnabled;
+    final float buttonWidth = 0.3f;
+    final float buttonPositionHeight = 0.3f;
     Stage stage = new Stage();
-    private TextButton recommend = new TextButton("Recommend", Assets.skin);
-    private TextButton myMusic = new TextButton("My Music", Assets.skin);
-    private TextButton listenToWorld = new TextButton("Listen to world", Assets.skin);
-    private TextButton settings = new TextButton("Settings", Assets.skin);
+    private SpriteDrawable setting = new SpriteDrawable(Assets.setting_sprite);
+    private SpriteDrawable localmusic = new SpriteDrawable(Assets.local_sprite);
+    private SpriteDrawable recommendation = new SpriteDrawable(Assets.recommend_sprite);
+    private ImageButton settings = new ImageButton(setting);
+    private ImageButton myMusic = new ImageButton(localmusic);
+    private ImageButton recommend = new ImageButton(recommendation);
     int time = 0;
     public MenuScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
@@ -48,12 +54,6 @@ public class MenuScreen implements Screen{
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
-        listenToWorld.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
-            }
-        });
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -64,17 +64,14 @@ public class MenuScreen implements Screen{
         /**
          * layout of menu buttons
          */
-        recommend.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        recommend.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.75f);
-        myMusic.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        myMusic.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.6f);
-        listenToWorld.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        listenToWorld.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.45f);
-        settings.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        settings.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * 0.3f);
+        recommend.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
+        recommend.setPosition(stage.getWidth() * 0.1f, stage.getHeight() * buttonPositionHeight);
+        myMusic.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
+        myMusic.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * buttonPositionHeight);
+        settings.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
+        settings.setPosition(stage.getWidth() * 0.5f, stage.getHeight() * buttonPositionHeight);
         stage.addActor(recommend);
         stage.addActor(myMusic);
-        stage.addActor(listenToWorld);
         stage.addActor(settings);
         InputMultiplexer impx = new InputMultiplexer();
         impx.addProcessor(stage);
