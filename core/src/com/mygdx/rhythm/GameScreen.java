@@ -4,11 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+
+import java.awt.Label;
 
 /**
  * Created by yuyin on 2016/1/12.
@@ -29,12 +33,23 @@ public class GameScreen implements Screen{
     Stage stage = new Stage();
     SpriteDrawable resumeDrawable = new SpriteDrawable(Assets.sprite_resume);
     ImageButton resumeButton = new ImageButton(resumeDrawable);
+
+    private String score;
+
+    BitmapFont scorefont;
+    private  Songs song;
+
+    //here play from the new obj songs
+
+
     public GameScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
+        this.song = rhythmGame.thissong;
+        this.song.resetscore();
         batch = new SpriteBatch();
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
-        beatTime = Assets.beatTime;
+        beatTime = this.song.getonset();
         touchIsenabled = rhythmGame.isTouchIsEnabled();
     }
     @Override
@@ -44,15 +59,38 @@ public class GameScreen implements Screen{
         generalUpadate();
         batch.begin();
         batch.draw(Assets.background, 0, 0, width, height);
-        currentTime =  Assets.music.getPosition()*1000;
+
+        scorefont.setColor(Color.BLACK);
+        scorefont.draw(batch, score, 100, 600 ,500, 1000, true);
+
+        if(!isPaused) {
+        currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(Math.abs(currentTime-beatTime[beatIndex])<=200){
             batch.draw(Assets.hit, 10, 10);
+            //do sth here to add animation to notes
+
+            
+            if(touchIsenabled){
+                if (touch){
+                    batch.draw(Assets.hit, 100, 100);
+                    song.addscore();
+                    score = "score: "+song.getscore();
+                }
+            }else{
+                if (rhythmGame.isKnock()) {
+                    batch.draw(Assets.hit, 100, 100);
+                    song.addscore();
+                    score = "score: "+song.getscore();
+                }
+            }
+
+
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
         }else if(currentTime-beatTime[beatIndex]>200){
             beatIndex++;
         }
-        if(!isPaused) {
+
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
@@ -80,21 +118,19 @@ public class GameScreen implements Screen{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (rhythmGame.isKnock()) {
-                    batch.draw(Assets.hit, 100, 100);
-                }
+
             }
-            if(time<1000){
+            if(time<1500){
                 time++;
             }else{
-                Assets.music.dispose();
+                song.getSong().dispose();
             }
         }else{
             batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
             stage.addActor(resumeButton);
             if(resumeButton.isPressed()){
                 isPaused = false;
-                Assets.music.play();
+                song.getSong().play();
                 resumeButton.remove();
             }
         }
@@ -110,6 +146,7 @@ public class GameScreen implements Screen{
             currentIndex++;
         }
         return show;
+
     }
     public void generalUpadate(){
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
@@ -131,7 +168,11 @@ public class GameScreen implements Screen{
         impx.addProcessor(stage);
         Gdx.input.setInputProcessor(impx);
         Gdx.input.setCatchBackKey(true);
-        Assets.music.play();
+
+        score = "score: 0";
+        scorefont = new BitmapFont();
+
+        this.song.getSong().play();
     }
     @Override
     public void resize(int width, int height) {
@@ -140,7 +181,7 @@ public class GameScreen implements Screen{
 
     @Override
     public void pause() {
-        Assets.music.pause();
+        song.getSong().pause();
     }
 
     @Override

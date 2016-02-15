@@ -1,6 +1,5 @@
 /Users/sushi/Desktop/QUProject/android/src/obj/local/x86/objs/MusicToOnset/MusicToOnset.o: \
   /Users/sushi/Desktop/QUProject/android/src/jni/MusicToOnset.cpp \
-  /Users/sushi/Desktop/QUProject/android/src/jni/MusicToOnset.h \
   /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/jni.h \
   /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/sys/cdefs.h \
   /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/sys/cdefs_elf.h \
@@ -28,9 +27,8 @@
   Superpowered/SuperpoweredSimple.h \
   /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES.h \
   /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES_Platform.h \
-  /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES_AndroidConfiguration.h
-
-/Users/sushi/Desktop/QUProject/android/src/jni/MusicToOnset.h:
+  /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES_AndroidConfiguration.h \
+  /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/android/log.h
 
 /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/jni.h:
 
@@ -89,3 +87,5 @@ Superpowered/SuperpoweredSimple.h:
 /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES_Platform.h:
 
 /Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/SLES/OpenSLES_AndroidConfiguration.h:
+
+/Users/sushi/Library/Android/sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/android/log.h:

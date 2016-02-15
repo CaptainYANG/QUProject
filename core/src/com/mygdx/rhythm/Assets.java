@@ -43,6 +43,8 @@ public class Assets {
     public static Sprite setting_sprite;
     public static Texture local;
     public static Sprite local_sprite;
+    public static Music music0;
+    public static Songs song0;///test from here
 
     public static void load(){
         texture_corgi = new Texture(Gdx.files.internal("midCorgi.png"));
@@ -61,6 +63,8 @@ public class Assets {
         sprite_buttonOff = new Sprite(buttonOff);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
+        music0 = Gdx.audio.newMusic(Gdx.files.internal("YCJZ.mp3"));
+        song0 = new Songs(music0, 124, 3000);////test from here
         beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
         beatTime = new int[beatInfo.length];
         beatTime = getBeatTime(beatInfo);

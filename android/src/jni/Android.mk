@@ -1,6 +1,5 @@
 LOCAL_PATH := $(call my-dir)
 SUPERPOWERED_PATH := Superpowered
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := Superpowered
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
@@ -28,7 +27,7 @@ LOCAL_SRC_FILES :=  \
 
 LOCAL_C_INCLUDES += $(SUPERPOWERED_PATH)
 
-LOCAL_LDLIBS := -llog -landroid -lOpenSLES 
+LOCAL_LDLIBS := -llog -landroid -lOpenSLES
 LOCAL_STATIC_LIBRARIES := Superpowered
 LOCAL_CFLAGS = -O3
 include $(BUILD_SHARED_LIBRARY)

@@ -1,6 +1,7 @@
 package com.mygdx.rhythm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,8 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+
+
+import net.rdrei.android.dirchooser.DirectoryChooserActivity;
+import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
 import java.io.File;
 
@@ -46,16 +52,34 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		if (buffersizeString == null) buffersizeString = "512";
 
 		System.loadLibrary("MusicToOnset");
-		float[] haveResults;
 
-		File musicfile = new File("/assets/mylove.mp3");
-		System.out.println(musicfile.getAbsolutePath());
 
-		haveResults = MusicToOnset(musicfile.getAbsolutePath());
-		//System.out.printf("bpm:"+haveResults[0] +",startMs:"+haveResults[1]);
+		File musicfile = new File(getFilesDir()+"/mylove.mp3");
+		System.out.println(musicfile.getPath());
+		System.out.println(Gdx.files.internal("mylove.mp3").file().getAbsolutePath());
+
+		float[] result = new float[2];
+
+
+		result = MusicToOnset(musicfile.getPath());
+		System.out.printf("bpm:\n"+result[0] +"\n,startMs:\n"+result[1]+"\n");
 
 		//System.loadLibrary("FrequencyDomain");
 		//FrequencyDomain(Integer.parseInt(samplerateString), Integer.parseInt(buffersizeString));
+
+		//final Intent chooserIntent = new Intent(this, DirectoryChooserActivity.class);
+
+		//final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+		//		.newDirectoryName("DirChooserSample")
+		//		.allowReadOnlyDirectory(true)
+		//		.allowNewDirectoryNameModification(true)
+		//		.build();
+
+		//chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+
+// REQUEST_DIRECTORY is a constant integer to identify the request, e.g. 0
+		//startActivityForResult(chooserIntent, 1);
+
 	}
 
 
