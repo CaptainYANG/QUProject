@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 /**
  * Created by sushi on 14/02/16.
  */
-public class LocalSongs {
+public class Songs {
 
     private int bmp;
     private int startMs;
@@ -15,12 +15,12 @@ public class LocalSongs {
     private Music song;
     private int[] onset;
 
-    public LocalSongs(Music song, int bmp, int startMs){
+    public Songs(Music song, int bmp, int startMs){
         this.song = song;
         this.bmp = bmp;
         this.startMs = startMs;
     };
-    public LocalSongs(Music song, int[] onset){
+    public Songs(Music song, int[] onset){
         this.song = song;
         this.onset = onset;
     };

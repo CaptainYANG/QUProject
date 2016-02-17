@@ -47,7 +47,7 @@ public class GameScreen implements Screen{
     private String score;
 
     BitmapFont scorefont;
-    private LocalSongs song;
+    private Songs song;
 
     //here play from the new obj songs
 
@@ -161,6 +161,9 @@ public class GameScreen implements Screen{
             }
 
         }else{
+            if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
+            }
             batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
             pauseButton.setVisible(false);
             resumeButton.setPosition(0, stage.getHeight() - 150);

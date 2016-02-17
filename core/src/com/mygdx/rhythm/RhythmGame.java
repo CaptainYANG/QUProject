@@ -10,7 +10,7 @@ public class RhythmGame extends Game {
 	float currentTime = 0;
 	boolean knock = false;
 	boolean touchIsEnabled = true;
-	LocalSongs song ;
+	Songs song ;
 
 	public void setTouchIsEnabled(boolean touchIsEnabled) {
 		this.touchIsEnabled = touchIsEnabled;
