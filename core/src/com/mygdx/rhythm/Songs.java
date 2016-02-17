@@ -2,6 +2,8 @@ package com.mygdx.rhythm;
 
 import com.badlogic.gdx.audio.Music;
 
+import java.util.Random;
+
 /**
  * Created by sushi on 14/02/16.
  */
@@ -14,6 +16,7 @@ public class Songs {
     private int performance;
     private Music song;
     private int[] onset;
+    private int[] direction;
 
     public Songs(Music song, int bmp, int startMs){
         this.song = song;
@@ -35,15 +38,23 @@ public class Songs {
         if(onset!=null){
             return this.onset;
         }else {
-            int[] temp = new int[20];
-            temp[0] = this.startMs;
+            onset = new int[20];
+            onset[0] = this.startMs;
             int step = 60000 / this.bmp;
             for (int i = 1; i < 20; i++) {
-                temp[i] = temp[i - 1] + 2 * step;
+                onset[i] = onset[i - 1] + 2 * step;
             }
-            return temp;
+            return onset;
         }
     };
+    public int[] getHitDirection(){
+        Random random = new Random();
+        direction = new int[20];
+        for (int i=0; i<20; i++){
+            direction[i] = random.nextInt(2);
+        }
+        return direction;
+    }
 
     //calculate how many stars get in game
     public void calcstat(){

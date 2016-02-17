@@ -27,6 +27,7 @@ public class GameScreen implements Screen{
     int height;
     int width;
     int[] beatTime;
+    int[] hitdirection;
     int beatIndex = 0;
     float currentTime;
     Boolean isPaused = false;
@@ -60,6 +61,7 @@ public class GameScreen implements Screen{
         height = Gdx.graphics.getHeight();
         width = Gdx.graphics.getWidth();
         beatTime = this.song.getonset();
+        hitdirection = this.song.getHitDirection();
         touchIsenabled = rhythmGame.isTouchIsEnabled();
     }
     @Override
@@ -81,38 +83,63 @@ public class GameScreen implements Screen{
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
-            batch.draw(Assets.hit, 10, 10);
-            //Todo:do sth here to add animation to notes
-
-            if(touchIsenabled){
-                if (touch){
-                    batch.draw(Assets.hit, 10, 100);
-                    if(added == false) {
-                        song.addscore();
-                        score = "score: "+song.getscore();
-                        added = true;
+            if (hitdirection[beatIndex]==0){
+                batch.draw(Assets.hit, 10, 10);
+                //Todo:do sth here to add animation to notes
+                if(touchIsenabled){
+                    if (touch){
+                        batch.draw(Assets.hit, 10, 100);
+                        if(added == false) {
+                            song.addscore();
+                            score = "score: "+song.getscore();
+                            added = true;
+                        }
+                    }else {
+                        added=false;
                     }
-                }else {
-                    added=false;
+                }else{
+                    if (rhythmGame.isKnock()) {
+                        batch.draw(Assets.hit, 10, 100);
+                        if(added == false) {
+                            song.addscore();
+                            score = "score: "+song.getscore();
+                            added = true;
+                        }
+                    }else {
+                        added=false;
+                    }
                 }
-            }else{
-                if (rhythmGame.isKnock()) {
-                    batch.draw(Assets.hit, 10, 100);
-                    if(added == false) {
-                        song.addscore();
-                        score = "score: "+song.getscore();
-                        added = true;
+            }else {
+                batch.draw(Assets.hit, width*0.6f, 10);
+                //Todo:do sth here to add animation to notes
+                if(touchIsenabled){
+                    if (touch){
+                        batch.draw(Assets.hit, width*0.6f, 100);
+                        if(added == false) {
+                            song.addscore();
+                            score = "score: "+song.getscore();
+                            added = true;
+                        }
+                    }else {
+                        added=false;
                     }
-                }else {
-                    added=false;
+                }else{
+                    if (rhythmGame.isKnock()) {
+                        batch.draw(Assets.hit, 10, 100);
+                        if(added == false) {
+                            song.addscore();
+                            score = "score: "+song.getscore();
+                            added = true;
+                        }
+                    }else {
+                        added=false;
+                    }
                 }
             }
-
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
         }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
             beatIndex++;
         }
-
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
@@ -131,7 +158,11 @@ public class GameScreen implements Screen{
                 touch = false;
             } else {
                 if (rhythmGame.isKnock()) {
-                    batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                    if(beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
+                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                    }else {
+                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                    }
                 } else {
                     batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
                 }
@@ -167,7 +198,7 @@ public class GameScreen implements Screen{
             resumeButton.setPosition(0, stage.getHeight() - 150);
             stage.addActor(resumeButton);
 
-            homeButton.setPosition(resumeButton.getWidth()+10, stage.getHeight()-150);
+            homeButton.setPosition(resumeButton.getWidth() + 10, stage.getHeight() - 150);
             stage.addActor(homeButton);
 
             if(resumeButton.isPressed()){
