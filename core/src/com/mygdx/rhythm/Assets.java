@@ -77,7 +77,7 @@ public class Assets {
         song0 = new Songs(music0, 124, 3000);
         song1 = new Songs(music, 60, 3000);
         ////test from here
-        beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
+        beatInfo = Gdx.files.internal("mylovenormal.txt").readString().split(System.getProperty("line.separator"));
         beatTime = new int[beatInfo.length];
         beatTime = getBeatTime(beatInfo);
         resume =new Texture(Gdx.files.internal("resume.png"));
