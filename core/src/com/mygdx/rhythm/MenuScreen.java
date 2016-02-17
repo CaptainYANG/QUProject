@@ -9,8 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 import javafx.scene.control.ToggleButton;
@@ -22,6 +26,8 @@ public class MenuScreen implements Screen{
     RhythmGame rhythmGame;
     MenuScreen menuScreen;
     SpriteBatch batch;
+
+
     boolean touchIsEnabled;
     final float buttonWidth = 0.3f;
     final float buttonPositionHeight = 0.3f;
@@ -32,15 +38,19 @@ public class MenuScreen implements Screen{
     private ImageButton settings = new ImageButton(setting);
     private ImageButton myMusic = new ImageButton(localmusic);
     private ImageButton recommend = new ImageButton(recommendation);
+
     int time = 0;
     public MenuScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
         this.menuScreen = this;
+
         batch = new SpriteBatch();
         touchIsEnabled = rhythmGame.isTouchIsEnabled();
+
     }
     @Override
     public void show() {
+
         recommend.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -51,7 +61,9 @@ public class MenuScreen implements Screen{
         myMusic.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new SelectSongs(rhythmGame));
+
             }
         });
         settings.addListener(new ClickListener() {
@@ -77,15 +89,20 @@ public class MenuScreen implements Screen{
         impx.addProcessor(stage);
         Gdx.input.setInputProcessor(impx);
         Gdx.input.setCatchBackKey(true);
+
+
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.9F,0.58F,0.1F,0);
+        Gdx.gl.glClearColor(0.9F, 0.58F, 0.1F, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+
     }
+
+
 
     @Override
     public void resize(int width, int height) {
@@ -99,7 +116,6 @@ public class MenuScreen implements Screen{
 
     @Override
     public void resume() {
-
     }
 
     @Override
