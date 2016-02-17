@@ -49,14 +49,14 @@ public class SelectSongs implements Screen {
 
         button1.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                rhythmGame.thissong = Assets.song0;
+                rhythmGame.song = Assets.song0;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
 
         button2.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                rhythmGame.thissong = Assets.song1;
+                rhythmGame.song = Assets.song1;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });

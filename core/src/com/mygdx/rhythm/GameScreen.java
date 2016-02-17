@@ -15,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
-import java.awt.Label;
-
 /**
  * Created by yuyin on 2016/1/12.
  */
@@ -42,21 +40,21 @@ public class GameScreen implements Screen{
     ImageButton pauseButton = new ImageButton(pauseDrawable);
     ImageButton homeButton = new ImageButton(homeDrawable);
     ImageButton againButton = new ImageButton(againDrawable);
-
+    final static int sleepTime = 50;
     Boolean added;
 
 
     private String score;
 
     BitmapFont scorefont;
-    private  Songs song;
+    private LocalSongs song;
 
     //here play from the new obj songs
 
 
     public GameScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
-        this.song = rhythmGame.thissong;
+        this.song = rhythmGame.song;
         this.song.resetscore();
         batch = new SpriteBatch();
         height = Gdx.graphics.getHeight();
@@ -71,19 +69,20 @@ public class GameScreen implements Screen{
         generalUpadate();
         batch.begin();
         batch.draw(Assets.background, 0, 0, width, height);
-
-
-
         scorefont.setColor(Color.BLACK);
         scorefont.getData().setScale(3,3);
         scorefont.draw(batch, score, width-200, height-30);
 
         if(!isPaused) {
+            if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+                isPaused=true;
+                this.pause();
+            }
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
             batch.draw(Assets.hit, 10, 10);
-            //do sth here to add animation to notes
+            //Todo:do sth here to add animation to notes
             added = false;
 
             if(touchIsenabled){
@@ -107,7 +106,6 @@ public class GameScreen implements Screen{
                 }
             }
 
-
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
         }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
             beatIndex++;
@@ -124,7 +122,7 @@ public class GameScreen implements Screen{
                     batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
                 }
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -136,13 +134,13 @@ public class GameScreen implements Screen{
                     batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
                 }
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }
-            if(time<1500){
+            if(time<500){
                 time++;
             }else{
                 gameover();
@@ -165,9 +163,10 @@ public class GameScreen implements Screen{
         }else{
             batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
             pauseButton.setVisible(false);
+            resumeButton.setPosition(0, stage.getHeight() - 150);
             stage.addActor(resumeButton);
 
-            homeButton.setPosition(width - 150, 0);
+            homeButton.setPosition(resumeButton.getWidth()+10, stage.getHeight()-150);
             stage.addActor(homeButton);
 
             if(resumeButton.isPressed()){
@@ -200,10 +199,6 @@ public class GameScreen implements Screen{
 
     }
     public void generalUpadate(){
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
-            isPaused=true;
-            this.pause();
-        }
         if(Gdx.input.isTouched()){
             touch = true;
             if(Gdx.input.getX()<Gdx.graphics.getWidth()/2){
@@ -251,7 +246,9 @@ public class GameScreen implements Screen{
 
         stage.addActor(againButton);
         stage.addActor(homeButton);
-
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
+        }
         if(againButton.isPressed()){
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
 

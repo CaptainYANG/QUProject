@@ -2,7 +2,6 @@ package com.mygdx.rhythm;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 
 
 public class RhythmGame extends Game {
@@ -11,7 +10,7 @@ public class RhythmGame extends Game {
 	float currentTime = 0;
 	boolean knock = false;
 	boolean touchIsEnabled = true;
-	Songs thissong ;
+	LocalSongs song ;
 
 	public void setTouchIsEnabled(boolean touchIsEnabled) {
 		this.touchIsEnabled = touchIsEnabled;
@@ -24,7 +23,7 @@ public class RhythmGame extends Game {
 	@Override
 	public void create () {
 		Assets.load();
-		this.thissong = Assets.song0;
+		this.song = Assets.recommendSong;
 		Gdx.input.setCatchBackKey(true);
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen) ;

@@ -9,15 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
-import javafx.scene.control.ToggleButton;
 
 /**
  * Created by yuyin on 2016/1/13.
@@ -29,8 +22,9 @@ public class MenuScreen implements Screen{
 
 
     boolean touchIsEnabled;
-    final float buttonWidth = 0.3f;
-    final float buttonPositionHeight = 0.3f;
+    final float buttonWidth = 0.5f;
+    final float buttonHeight = 0.2f;
+    final float buttonPositionWidth = 0.3f;
     Stage stage = new Stage();
     private SpriteDrawable setting = new SpriteDrawable(Assets.setting_sprite);
     private SpriteDrawable localmusic = new SpriteDrawable(Assets.local_sprite);
@@ -76,12 +70,12 @@ public class MenuScreen implements Screen{
         /**
          * layout of menu buttons
          */
-        recommend.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
-        recommend.setPosition(stage.getWidth() * 0.1f, stage.getHeight() * buttonPositionHeight);
-        myMusic.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
-        myMusic.setPosition(stage.getWidth() * 0.3f, stage.getHeight() * buttonPositionHeight);
-        settings.setSize(stage.getWidth() * buttonWidth, stage.getWidth() * buttonWidth);
-        settings.setPosition(stage.getWidth() * 0.5f, stage.getHeight() * buttonPositionHeight);
+        recommend.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
+        recommend.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.5f);
+        myMusic.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
+        myMusic.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.35f);
+        settings.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
+        settings.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.2f);
         stage.addActor(recommend);
         stage.addActor(myMusic);
         stage.addActor(settings);

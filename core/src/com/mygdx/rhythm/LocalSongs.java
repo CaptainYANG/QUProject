@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 /**
  * Created by sushi on 14/02/16.
  */
-public class Songs {
+public class LocalSongs {
 
     private int bmp;
     private int startMs;
@@ -13,13 +13,17 @@ public class Songs {
     private int totalscore;
     private int performance;
     private Music song;
+    private int[] onset;
 
-    public Songs(Music song, int bmp , int startMs){
+    public LocalSongs(Music song, int bmp, int startMs){
         this.song = song;
         this.bmp = bmp;
         this.startMs = startMs;
     };
-
+    public LocalSongs(Music song, int[] onset){
+        this.song = song;
+        this.onset = onset;
+    };
     //add i point to score
     public void addscore(){
         this.score++;
@@ -28,13 +32,17 @@ public class Songs {
 
     //setup game points
     public int[] getonset(){
-        int[] temp = new int[20];
-        temp[0] = this.startMs;
-        int step = 60000/this.bmp;
-        for(int i=1;i<20;i++){
-            temp[i] = temp[i-1]+2*step;
+        if(onset!=null){
+            return this.onset;
+        }else {
+            int[] temp = new int[20];
+            temp[0] = this.startMs;
+            int step = 60000 / this.bmp;
+            for (int i = 1; i < 20; i++) {
+                temp[i] = temp[i - 1] + 2 * step;
+            }
+            return temp;
         }
-        return temp;
     };
 
     //calculate how many stars get in game

@@ -2,16 +2,9 @@ package com.mygdx.rhythm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
-import java.awt.TexturePaint;
-
-import jdk.internal.dynalink.beans.StaticClass;
 
 /**
  * Created by yuyin on 2016/1/12.
@@ -51,8 +44,9 @@ public class Assets {
     public static Texture local;
     public static Sprite local_sprite;
     public static Music music0;
-    public static Songs song0;
-    public static Songs song1;
+    public static LocalSongs song0;
+    public static LocalSongs song1;
+    public static LocalSongs recommendSong;
     ///test from here
 
     public static void load(){
@@ -74,12 +68,13 @@ public class Assets {
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
         music0 = Gdx.audio.newMusic(Gdx.files.internal("YCJZ.mp3"));
-        song0 = new Songs(music0, 124, 3000);
-        song1 = new Songs(music, 60, 3000);
+        song0 = new LocalSongs(music0, 124, 3000);
+        song1 = new LocalSongs(music, 60, 3000);
         ////test from here
-        beatInfo = Gdx.files.internal("mylove.txt").readString().split(System.getProperty("line.separator"));
+        beatInfo = Gdx.files.internal("myloveInsane.txt").readString().split(System.getProperty("line.separator"));
         beatTime = new int[beatInfo.length];
         beatTime = getBeatTime(beatInfo);
+        recommendSong = new LocalSongs(music,beatTime);
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));
