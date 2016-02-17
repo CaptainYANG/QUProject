@@ -41,7 +41,7 @@ public class GameScreen implements Screen{
     ImageButton homeButton = new ImageButton(homeDrawable);
     ImageButton againButton = new ImageButton(againDrawable);
     final static int sleepTime = 50;
-    Boolean added;
+    Boolean added=false;
 
 
     private String score;
@@ -83,7 +83,6 @@ public class GameScreen implements Screen{
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
             batch.draw(Assets.hit, 10, 10);
             //Todo:do sth here to add animation to notes
-            added = false;
 
             if(touchIsenabled){
                 if (touch){
@@ -93,16 +92,19 @@ public class GameScreen implements Screen{
                         score = "score: "+song.getscore();
                         added = true;
                     }
+                }else {
+                    added=false;
                 }
             }else{
                 if (rhythmGame.isKnock()) {
-
                     batch.draw(Assets.hit, 10, 100);
                     if(added == false) {
                         song.addscore();
                         score = "score: "+song.getscore();
                         added = true;
                     }
+                }else {
+                    added=false;
                 }
             }
 
@@ -129,7 +131,7 @@ public class GameScreen implements Screen{
                 touch = false;
             } else {
                 if (rhythmGame.isKnock()) {
-                    batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                    batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
                 } else {
                     batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
                 }
@@ -152,7 +154,6 @@ public class GameScreen implements Screen{
             }
 
             if(beatIndex == this.song.getonset().length){
-
                 gameover();
                 batch.draw(Assets.table, 100, 100, width - 200, height - 200);
                 score = "score: "+song.getscore()+" / " + song.getonset().length;
@@ -161,9 +162,6 @@ public class GameScreen implements Screen{
             }
 
         }else{
-            if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
-            }
             batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
             pauseButton.setVisible(false);
             resumeButton.setPosition(0, stage.getHeight() - 150);
