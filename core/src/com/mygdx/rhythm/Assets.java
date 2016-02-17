@@ -100,7 +100,7 @@ public class Assets {
         String[] temp;
         for(int i=0;i<beatInfo.length;i++){
             temp = beatInfo[i].split(",");
-            beatTime[i] = Integer.parseInt(temp[0]);
+            beatTime[i] = Integer.parseInt(temp[2]);
         }
         return beatTime;
     }
