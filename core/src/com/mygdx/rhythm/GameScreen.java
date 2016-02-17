@@ -49,7 +49,7 @@ public class GameScreen implements Screen{
     private String score;
 
     BitmapFont scorefont;
-    private  Songs song;
+    private  Songs song ;
 
     //here play from the new obj songs
 
@@ -63,6 +63,7 @@ public class GameScreen implements Screen{
         width = Gdx.graphics.getWidth();
         beatTime = this.song.getonset();
         touchIsenabled = rhythmGame.isTouchIsEnabled();
+        added = false;
     }
     @Override
     public void render(float delta) {
@@ -81,10 +82,11 @@ public class GameScreen implements Screen{
         if(!isPaused) {
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
+            //added = false;
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
             batch.draw(Assets.hit, 10, 10);
             //do sth here to add animation to notes
-            added = false;
+
 
             if(touchIsenabled){
                 if (touch){
@@ -111,6 +113,7 @@ public class GameScreen implements Screen{
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
         }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
             beatIndex++;
+            added = false;
         }
 
             if (touchIsenabled) {
