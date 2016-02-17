@@ -81,7 +81,7 @@ public class GameScreen implements Screen{
         if(!isPaused) {
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
-        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=200){
+        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
             batch.draw(Assets.hit, 10, 10);
             //do sth here to add animation to notes
             added = false;
@@ -109,7 +109,7 @@ public class GameScreen implements Screen{
 
 
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
-        }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>200){
+        }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
             beatIndex++;
         }
 
@@ -145,18 +145,20 @@ public class GameScreen implements Screen{
             if(time<1500){
                 time++;
             }else{
-                song.getSong().pause();
                 gameover();
                 this.pause();
+
                 batch.draw(Assets.table, 100, 100, width - 200, height - 200);
-                scorefont.draw(batch, score, width/2, 2*height/3);
+                score = "score: "+song.getscore()+" / " + song.getonset().length;
+                scorefont.draw(batch, score, 2*width/5, 2*height/3);
             }
 
             if(beatIndex == this.song.getonset().length){
-                song.getSong().pause();
+
                 gameover();
                 batch.draw(Assets.table, 100, 100, width - 200, height - 200);
-                scorefont.draw(batch, score, width/2, 2*height/3);
+                score = "score: "+song.getscore()+" / " + song.getonset().length;
+                scorefont.draw(batch, score, 2*width/5, 2*height/3);
 
             }
 
@@ -176,6 +178,7 @@ public class GameScreen implements Screen{
                 homeButton.remove();
             }
             if(homeButton.isPressed()){
+                song.getSong().stop();
                 homeButton.remove();
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
             }
@@ -240,11 +243,11 @@ public class GameScreen implements Screen{
     }
 
     public void gameover(){
-
+        song.getSong().stop();
         pauseButton.setVisible(false);
         resumeButton.setVisible(false);
         againButton.setPosition(width/3,height/3);
-        homeButton.setPosition(2*width/3,height/3);
+        homeButton.setPosition(3*width/5,height/3);
 
         stage.addActor(againButton);
         stage.addActor(homeButton);

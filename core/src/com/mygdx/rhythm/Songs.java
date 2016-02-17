@@ -28,10 +28,10 @@ public class Songs {
 
     //setup game points
     public int[] getonset(){
-        int[] temp = new int[100];
+        int[] temp = new int[20];
         temp[0] = this.startMs;
         int step = 60000/this.bmp;
-        for(int i=1;i<100;i++){
+        for(int i=1;i<20;i++){
             temp[i] = temp[i-1]+2*step;
         }
         return temp;
@@ -57,6 +57,10 @@ public class Songs {
     public Music getSong(){
         return this.song;
     };
+
+    public int getBmp(){ return this.bmp;};
+
+    public int getStartMs() {return this.startMs;};
 
     public int getscore(){
         return this.score;
