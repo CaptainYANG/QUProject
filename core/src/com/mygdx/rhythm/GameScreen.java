@@ -83,11 +83,12 @@ public class GameScreen implements Screen{
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
-            if (hitdirection[beatIndex]==0){
+            //TODO: change the judgement
+            if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
                 batch.draw(Assets.hit, 10, 10);
                 //Todo:do sth here to add animation to notes
                 if(touchIsenabled){
-                    if (touch){
+                    if (touch&&isLeft){
                         batch.draw(Assets.hit, 10, 100);
                         if(added == false) {
                             song.addscore();
@@ -115,7 +116,7 @@ public class GameScreen implements Screen{
                 if(touchIsenabled){
                     if (touch){
                         batch.draw(Assets.hit, width*0.6f, 100);
-                        if(added == false) {
+                        if(added == false&&!isLeft) {
                             song.addscore();
                             score = "score: "+song.getscore();
                             added = true;
@@ -125,7 +126,7 @@ public class GameScreen implements Screen{
                     }
                 }else{
                     if (rhythmGame.isKnock()) {
-                        batch.draw(Assets.hit, 10, 100);
+                        batch.draw(Assets.hit, width*0.6f, 100);
                         if(added == false) {
                             song.addscore();
                             score = "score: "+song.getscore();
