@@ -18,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class MenuScreen implements Screen{
     RhythmGame rhythmGame;
     MenuScreen menuScreen;
-    SpriteBatch batch;
+    private SpriteBatch batch;
+    int height;
+    int width;
 
 
     boolean touchIsEnabled;
@@ -33,6 +35,7 @@ public class MenuScreen implements Screen{
     private ImageButton myMusic = new ImageButton(localmusic);
     private ImageButton recommend = new ImageButton(recommendation);
 
+
     int time = 0;
     public MenuScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
@@ -40,6 +43,8 @@ public class MenuScreen implements Screen{
 
         batch = new SpriteBatch();
         touchIsEnabled = rhythmGame.isTouchIsEnabled();
+        height = Gdx.graphics.getHeight();
+        width = Gdx.graphics.getWidth();
 
     }
     @Override
@@ -91,6 +96,9 @@ public class MenuScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0.9F, 0.58F, 0.1F, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(Assets.backgroundMenu, 0, 0, width, height);
+        batch.end();
         stage.act();
         stage.draw();
 
