@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
  * Created by yuyin on 2016/1/13.
  */
 public class MenuScreen implements Screen{
-    RhythmGame rhythmGame;
+    com.mygdx.inuMon.RhythmGame rhythmGame;
     MenuScreen menuScreen;
     SpriteBatch batch;
 
@@ -34,7 +34,7 @@ public class MenuScreen implements Screen{
     private ImageButton recommend = new ImageButton(recommendation);
 
     int time = 0;
-    public MenuScreen(RhythmGame rhythmGame){
+    public MenuScreen(com.mygdx.inuMon.RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
         this.menuScreen = this;
 
@@ -49,21 +49,21 @@ public class MenuScreen implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.setTouchIsEnabled(touchIsEnabled);
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
             }
         });
         myMusic.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new SelectSongs(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.SelectSongs(rhythmGame));
 
             }
         });
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new SettingScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.SettingScreen(rhythmGame));
 
             }
         });

@@ -1,7 +1,6 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,15 +8,11 @@ import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
-
-import net.rdrei.android.dirchooser.DirectoryChooserActivity;
-import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
 import java.io.File;
 
@@ -61,7 +56,7 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		float[] result = new float[2];
 
 
-		result = MusicToOnset(musicfile.getPath());
+		//result = MusicToOnset(musicfile.getPath());
 		System.out.printf("bpm:\n"+result[0] +"\n,startMs:\n"+result[1]+"\n");
 
 		//System.loadLibrary("FrequencyDomain");
@@ -84,7 +79,7 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 
 
 
-	private native float[] MusicToOnset(String music);
+	//private native float[] MusicToOnset(String music);
 
 	//private native void FrequencyDomain(long samplerate, long buffersize);
 

@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -44,9 +44,9 @@ public class Assets {
     public static Texture local;
     public static Sprite local_sprite;
     public static Music music0;
-    public static Songs song0;
-    public static Songs song1;
-    public static Songs recommendSong;
+    public static Song song0;
+    public static Song song1;
+    public static Song recommendSong;
     ///test from here
 
     public static void load(){
@@ -68,13 +68,13 @@ public class Assets {
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
         music0 = Gdx.audio.newMusic(Gdx.files.internal("YCJZ.mp3"));
-        song0 = new Songs(music0, 124, 3000);
-        song1 = new Songs(music, 60, 3000);
+        song0 = new Song(music0, 124, 3000);
+        song1 = new Song(music, 60, 3000);
         ////test from here
         beatInfo = Gdx.files.internal("mylovenormal.txt").readString().split(System.getProperty("line.separator"));
         beatTime = new int[beatInfo.length];
         beatTime = getBeatTime(beatInfo);
-        recommendSong = new Songs(music,beatTime);
+        recommendSong = new Song(music,beatTime);
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));

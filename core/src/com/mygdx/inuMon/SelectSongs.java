@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -50,14 +49,14 @@ public class SelectSongs implements Screen {
         button1.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.song0;
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
             }
         });
 
         button2.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.song1;
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
             }
         });
         button1.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);

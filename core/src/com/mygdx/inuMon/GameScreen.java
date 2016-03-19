@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -43,12 +43,10 @@ public class GameScreen implements Screen{
     ImageButton againButton = new ImageButton(againDrawable);
     final static int sleepTime = 50;
     Boolean added=false;
-
-
     private String score;
-
+    float xPosition;
     BitmapFont scorefont;
-    private Songs song;
+    private Song song;
 
     //here play from the new obj songs
 
@@ -82,11 +80,11 @@ public class GameScreen implements Screen{
             }
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
-        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=150){
+        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
             //TODO: change the judgement
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                batch.draw(Assets.hit, 10, 10);
-                //Todo:do sth here to add animation to notes
+                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
+                batch.draw(Assets.hit, xPosition, 10);
                 if(touchIsenabled){
                     if (touch&&isLeft){
                         batch.draw(Assets.hit, 10, 100);
@@ -100,7 +98,8 @@ public class GameScreen implements Screen{
                     }
                 }else{
                     if (rhythmGame.isKnock()) {
-                        batch.draw(Assets.hit, 10, 100);
+                        xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
+                        batch.draw(Assets.hit, xPosition, 100);
                         if(added == false) {
                             song.addscore();
                             score = "score: "+song.getscore();
@@ -111,8 +110,8 @@ public class GameScreen implements Screen{
                     }
                 }
             }else {
-                batch.draw(Assets.hit, width*0.6f, 10);
-                //Todo:do sth here to add animation to notes
+                xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.2f+width*0.6f;
+                batch.draw(Assets.hit, xPosition, 10);
                 if(touchIsenabled){
                     if (touch){
                         batch.draw(Assets.hit, width*0.6f, 100);
