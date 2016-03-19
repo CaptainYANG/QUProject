@@ -21,6 +21,9 @@ public class Assets {
     public static Texture table;
     public static Skin skin;
     public static Texture background;
+    public static Texture backgroundMenu;
+    public static Texture backgroundSetting;
+    public static Texture gamename;
     public static Texture hit;
     public static Sprite sprite_back;
     public static Sprite sprite_hit;
@@ -57,6 +60,9 @@ public class Assets {
         buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         table = new Texture(Gdx.files.internal("table.png"));
         background = new Texture(Gdx.files.internal("sakura.png"));
+        backgroundMenu = new Texture(Gdx.files.internal("backgroundMenu.jpg"));
+        backgroundSetting = new Texture(Gdx.files.internal("backgroundSetting.png"));
+        gamename = new Texture(Gdx.files.internal("gamename.gif"));
         hit = new Texture(Gdx.files.internal("hit.png"));
         sprite_corgi = new Sprite(texture_corgi);
         sprite_left = new Sprite(texture_left);

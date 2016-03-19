@@ -28,9 +28,13 @@ public class SettingScreen implements Screen{
     private TextButton ok = new TextButton("OK", Assets.skin);
     private BitmapFont settingfont = new BitmapFont();
     private boolean touch = true;
+    int height;
+    int width;
 
     public SettingScreen(RhythmGame rhythmGame) {
         this.rhythmGame = rhythmGame;
+        height = Gdx.graphics.getHeight();
+        width = Gdx.graphics.getWidth();
     }
 
     @Override
@@ -67,6 +71,7 @@ public class SettingScreen implements Screen{
         Gdx.gl.glClearColor(0.9F,0.58F,0.1F,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        batch.draw(Assets.backgroundSetting, 0, 0, width, height);
         settingfont.setColor(Color.WHITE);
         settingfont.getData().setScale(3,3);
         settingfont.draw(batch, "Play mode", stage.getWidth() * 0.3f, stage.getHeight() * 0.6f);
