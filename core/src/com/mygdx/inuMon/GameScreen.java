@@ -44,11 +44,10 @@ public class GameScreen implements Screen{
     ImageButton homeButton = new ImageButton(homeDrawable);
     ImageButton againButton = new ImageButton(againDrawable);
     final static int sleepTime = 50;
-    Boolean added;
-
-
+    Boolean added=false;
     private String score;
-
+    float xPosition;
+    float yPosition;
     BitmapFont scorefont;
     private Song song;
 
@@ -85,12 +84,12 @@ public class GameScreen implements Screen{
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
-            //TODO: change the judgement
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
-                batch.draw(Assets.hit, xPosition, 10);
+                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.4f;
+                yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
+                batch.draw(Assets.hit, xPosition, yPosition);
                 if(touchIsenabled){
-                    if (touch){
+                    if (touch&&isLeft){
                         batch.draw(Assets.hit, 10, 100);
                         if(added == false) {
                             song.addscore();
@@ -102,7 +101,8 @@ public class GameScreen implements Screen{
                     }
                 }else{
                     if (rhythmGame.isKnock()) {
-                        batch.draw(Assets.hit, 10, 100);
+                        xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
+                        batch.draw(Assets.hit, xPosition, 100);
                         if(added == false) {
                             song.addscore();
                             score = "score:"+song.getscore();
@@ -113,12 +113,12 @@ public class GameScreen implements Screen{
                     }
                 }
             }else {
-                batch.draw(Assets.hit, width*0.6f, 10);
-                //Todo:do sth here to add animation to notes
+                xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.2f+width*0.6f;
+                batch.draw(Assets.hit, xPosition, height*0.4f);
                 if(touchIsenabled){
                     if (touch){
                         batch.draw(Assets.hit, width*0.6f, 100);
-                        if(added == false) {
+                        if(added == false&&!isLeft) {
                             song.addscore();
                             score = "score:"+song.getscore();
                             added = true;
@@ -128,7 +128,7 @@ public class GameScreen implements Screen{
                     }
                 }else{
                     if (rhythmGame.isKnock()) {
-                        batch.draw(Assets.hit, 10, 100);
+                        batch.draw(Assets.hit, width*0.6f, 100);
                         if(added == false) {
                             song.addscore();
                             score = "score:"+song.getscore();
