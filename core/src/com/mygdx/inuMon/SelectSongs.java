@@ -2,6 +2,7 @@ package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -106,6 +107,9 @@ public class SelectSongs implements Screen {
         batch.end();
         stage.act();
         stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
+        }
 
 
     }
