@@ -50,6 +50,13 @@ public class Assets {
     public static Song song0;
     public static Song song1;
     public static Song recommendSong;
+    public static Texture miss;
+    public static Texture perfect;
+    public static Texture hiteffect;
+    public static Texture scorebackground;
+    public static Texture gameovertable;
+    public static Texture staron;
+    public static Texture staroff;
     ///test from here
 
     public static void load(){
@@ -59,11 +66,18 @@ public class Assets {
         buttonOn = new Texture(Gdx.files.internal("buttonOn.png"));
         buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         table = new Texture(Gdx.files.internal("table.png"));
-        background = new Texture(Gdx.files.internal("sakura.png"));
+        background = new Texture(Gdx.files.internal("background.png"));
         backgroundMenu = new Texture(Gdx.files.internal("backgroundMenu.jpg"));
         backgroundSetting = new Texture(Gdx.files.internal("backgroundSetting.png"));
         gamename = new Texture(Gdx.files.internal("gamename.gif"));
         hit = new Texture(Gdx.files.internal("hit.png"));
+        miss = new Texture(Gdx.files.internal("miss.png"));
+        perfect = new Texture(Gdx.files.internal("perfect.png"));
+        hiteffect = new Texture(Gdx.files.internal("hiteffect.png"));
+        scorebackground = new Texture(Gdx.files.internal("scorebackground.png"));
+        gameovertable = new Texture(Gdx.files.internal("gameovertable.png"));
+        staron = new Texture(Gdx.files.internal("staron.png"));
+        staroff = new Texture(Gdx.files.internal("staroff.png"));
         sprite_corgi = new Sprite(texture_corgi);
         sprite_left = new Sprite(texture_left);
         sprite_right = new Sprite(texture_right);
