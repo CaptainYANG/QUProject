@@ -45,6 +45,7 @@ public class GameScreen implements Screen{
     Boolean added=false;
     private String score;
     float xPosition;
+    float yPosition;
     BitmapFont scorefont;
     private Song song;
 
@@ -81,10 +82,10 @@ public class GameScreen implements Screen{
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
-            //TODO: change the judgement
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
-                batch.draw(Assets.hit, xPosition, 10);
+                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.4f;
+                yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
+                batch.draw(Assets.hit, xPosition, yPosition);
                 if(touchIsenabled){
                     if (touch&&isLeft){
                         batch.draw(Assets.hit, 10, 100);
@@ -111,7 +112,7 @@ public class GameScreen implements Screen{
                 }
             }else {
                 xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.2f+width*0.6f;
-                batch.draw(Assets.hit, xPosition, 10);
+                batch.draw(Assets.hit, xPosition, height*0.4f);
                 if(touchIsenabled){
                     if (touch){
                         batch.draw(Assets.hit, width*0.6f, 100);
