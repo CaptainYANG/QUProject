@@ -44,10 +44,11 @@ public class GameScreen implements Screen{
     ImageButton homeButton = new ImageButton(homeDrawable);
     ImageButton againButton = new ImageButton(againDrawable);
     final static int sleepTime = 50;
-    Boolean added=false;
+    Boolean added;
+
+
     private String score;
-    float xPosition;
-    float yPosition;
+
     BitmapFont scorefont;
     private Song song;
 
@@ -84,10 +85,10 @@ public class GameScreen implements Screen{
         currentTime =  song.getSong().getPosition()*1000;
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
+            //TODO: change the judgement
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.4f;
-                yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
-                batch.draw(Assets.hit, xPosition, yPosition);
+                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.2f;
+                batch.draw(Assets.hit, xPosition, 10);
                 if(touchIsenabled){
                     if (touch&&isLeft){
                         batch.draw(Assets.hit, 10, 100);
