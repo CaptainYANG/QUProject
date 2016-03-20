@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.badlogic.gdx.files.FileHandle;
 
 
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
@@ -59,10 +60,11 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
 		System.out.println(Gdx.files.internal("mylove.mp3").file().getAbsolutePath());
 
 		float[] result = new float[2];
+		FileHandle fh = Gdx.files.internal("mylove.mp3");
 
 
-		result = MusicToOnset(musicfile.getPath());
-		System.out.printf("bpm:\n"+result[0] +"\n,startMs:\n"+result[1]+"\n");
+		//result = MusicToOnset(fh.file().toString());
+		//System.out.printf("bpm:\n"+result[0] +"\n,startMs:\n"+result[1]+"\n");
 
 		//System.loadLibrary("FrequencyDomain");
 		//FrequencyDomain(Integer.parseInt(samplerateString), Integer.parseInt(buffersizeString));
