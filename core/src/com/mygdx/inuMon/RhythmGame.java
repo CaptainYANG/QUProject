@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -10,7 +10,7 @@ public class RhythmGame extends Game {
 	float currentTime = 0;
 	boolean knock = false;
 	boolean touchIsEnabled = true;
-	Songs song ;
+	Song song ;
 
 	public void setTouchIsEnabled(boolean touchIsEnabled) {
 		this.touchIsEnabled = touchIsEnabled;

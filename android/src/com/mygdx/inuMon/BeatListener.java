@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 /**
  * Created by sushi on 21/01/16.

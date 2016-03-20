@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -47,22 +46,32 @@ public class SelectSongs implements Screen {
 
         TextButton button1 = new TextButton("YCJX", Assets.skin);
         TextButton button2 = new TextButton("my love", Assets.skin);
+        TextButton button3 = new TextButton("Back", Assets.skin);
+
 
         button1.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.song0;
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
             }
         });
 
         button2.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.song1;
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
             }
         });
+        button3.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                rhythmGame.song = Assets.song1;
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
+            }
+        });
+
         button1.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
         button2.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
+        button3.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
         table = new Table();
         table.setPosition(width/2,height/2);
         table.top().center();
@@ -75,7 +84,8 @@ public class SelectSongs implements Screen {
         //table.add(addressText).width(100);
         table.setVisible(true);
         //table.setPosition(50, stage.getHeight());
-
+        table.row().height(70);
+        table.add(button3).width(300).pad(10);
 
 
         stage.addActor(table);
@@ -92,6 +102,9 @@ public class SelectSongs implements Screen {
 
         Gdx.gl.glClearColor(0.9F,0.58F,0.1F,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(Assets.backgroundSetting, 0, 0, width, height);
+        batch.end();
         stage.act();
         stage.draw();
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)){

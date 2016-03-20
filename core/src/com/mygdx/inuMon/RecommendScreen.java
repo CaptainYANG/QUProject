@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Screen;
 

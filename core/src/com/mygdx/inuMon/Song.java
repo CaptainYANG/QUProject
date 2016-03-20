@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.audio.Music;
 
@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Created by sushi on 14/02/16.
  */
-public class Songs {
+public class Song {
 
     private int bmp;
     private int startMs;
@@ -18,12 +18,12 @@ public class Songs {
     private int[] onset;
     private int[] direction;
 
-    public Songs(Music song, int bmp, int startMs){
+    public Song(Music song, int bmp, int startMs){
         this.song = song;
         this.bmp = bmp;
         this.startMs = startMs;
     };
-    public Songs(Music song, int[] onset){
+    public Song(Music song, int[] onset){
         this.song = song;
         this.onset = onset;
     };
@@ -38,10 +38,10 @@ public class Songs {
         if(onset!=null){
             return this.onset;
         }else {
-            onset = new int[20];
+            onset = new int[60];
             onset[0] = this.startMs;
             int step = 60000 / this.bmp;
-            for (int i = 1; i < 20; i++) {
+            for (int i = 1; i < 60; i++) {
                 onset[i] = onset[i - 1] + 2 * step;
             }
             return onset;
@@ -49,8 +49,8 @@ public class Songs {
     };
     public int[] getHitDirection(){
         Random random = new Random();
-        direction = new int[20];
-        for (int i=0; i<20; i++){
+        direction = new int[60];
+        for (int i=0; i<60; i++){
             direction[i] = random.nextInt(2);
         }
         return direction;

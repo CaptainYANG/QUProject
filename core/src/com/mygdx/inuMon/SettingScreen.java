@@ -1,4 +1,4 @@
-package com.mygdx.rhythm;
+package com.mygdx.inuMon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -11,12 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
-import javafx.scene.control.ToggleButton;
 
 /**
  * Created by yuyin on 2016/1/27.
@@ -31,9 +28,13 @@ public class SettingScreen implements Screen{
     private TextButton ok = new TextButton("OK", Assets.skin);
     private BitmapFont settingfont = new BitmapFont();
     private boolean touch = true;
+    int height;
+    int width;
 
     public SettingScreen(RhythmGame rhythmGame) {
         this.rhythmGame = rhythmGame;
+        height = Gdx.graphics.getHeight();
+        width = Gdx.graphics.getWidth();
     }
 
     @Override
@@ -70,6 +71,7 @@ public class SettingScreen implements Screen{
         Gdx.gl.glClearColor(0.9F,0.58F,0.1F,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        batch.draw(Assets.backgroundSetting, 0, 0, width, height);
         settingfont.setColor(Color.WHITE);
         settingfont.getData().setScale(3,3);
         settingfont.draw(batch, "Play mode", stage.getWidth() * 0.3f, stage.getHeight() * 0.6f);
