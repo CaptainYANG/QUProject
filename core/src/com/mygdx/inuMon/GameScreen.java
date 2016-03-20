@@ -31,7 +31,7 @@ public class GameScreen implements Screen{
     int[] hitdirection;
     int beatIndex = 0;
     float currentTime;
-    float xPosition;
+    //float xPosition;
     Boolean isPaused = false;
     Boolean touchIsenabled= true;
     Stage stage = new Stage();
