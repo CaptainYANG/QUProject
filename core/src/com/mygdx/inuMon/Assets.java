@@ -50,6 +50,11 @@ public class Assets {
     public static Song song0;
     public static Song song1;
     public static Song recommendSong;
+    public static Sprite sakura1;
+    public static Sprite sakura2;
+    public static Sprite sakura3;
+    public static Sprite sakura4;
+    public static Sprite sakura5;
     ///test from here
 
     public static void load(){
@@ -59,7 +64,7 @@ public class Assets {
         buttonOn = new Texture(Gdx.files.internal("buttonOn.png"));
         buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         table = new Texture(Gdx.files.internal("table.png"));
-        background = new Texture(Gdx.files.internal("sakura.png"));
+        background = new Texture(Gdx.files.internal("backgroundSetting.png"));
         backgroundMenu = new Texture(Gdx.files.internal("backgroundMenu.jpg"));
         backgroundSetting = new Texture(Gdx.files.internal("backgroundSetting.png"));
         gamename = new Texture(Gdx.files.internal("gamename.gif"));
@@ -89,6 +94,11 @@ public class Assets {
         sprite_home = new Sprite(home);
         again =new Texture(Gdx.files.internal("again.png"));
         sprite_again = new Sprite(again);
+        sakura1 = new Sprite(new Texture(Gdx.files.internal("sakura1.png")));
+        sakura2 = new Sprite(new Texture(Gdx.files.internal("sakura2.png")));
+        sakura3 = new Sprite(new Texture(Gdx.files.internal("sakura3.png")));
+        sakura4 = new Sprite(new Texture(Gdx.files.internal("sakura4.png")));
+        sakura5 = new Sprite(new Texture(Gdx.files.internal("sakura5.png")));
 
         recommend = new Texture(Gdx.files.internal("recommendation.png"));
         recommend_sprite = new Sprite(recommend);
