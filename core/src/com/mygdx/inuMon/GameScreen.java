@@ -74,124 +74,73 @@ public class GameScreen implements Screen{
         generalUpadate();
         batch.begin();
         batch.draw(Assets.background, 0, 0, width, height);
-        scorefont = new BitmapFont(Gdx.files.internal("font.fnt"));
+        //scorefont = new BitmapFont(Gdx.files.internal("font.fnt"));
         scorefont.draw(batch, score, width - 450, height - 10);
-        batch.draw(Assets.scorebackground, width - 240, height - 80);
-        scorefont.setColor(Color.WHITE);
-        scorefont.getData().setScale(3,3);
-        scorefont.draw(batch, score, width-200, height-30);
 
         if(!isPaused) {
             if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
                 isPaused=true;
                 this.pause();
             }
-        currentTime =  song.getSong().getPosition()*1000;
-        rhythmGame.setCurrentTime(currentTime);
-        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
-            if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-<<<<<<< HEAD
-                xPosition=((currentTime-beatTime[beatIndex])/400)*width*0.4f;
-                yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
-                batch.draw(Assets.hit, xPosition, height*0.4f);
-                if(touchIsenabled){
-                    if (touch&&isLeft){
-                        batch.draw(Assets.hiteffect, width*0.35f, height*0.4f);
-                        if(added == false) {
-                            song.addscore();
-                            score = "score:"+song.getscore();
+            currentTime =  song.getSong().getPosition()*1000;
+            rhythmGame.setCurrentTime(currentTime);
+            if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
+                if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
+                    if(!added) {
+                        xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
+                        yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
+                        batch.draw(Assets.hit, xPosition, yPosition);
+                        if(touchIsenabled && touch && isLeft){
                             added = true;
-                            batch.draw(Assets.perfect, width*0.25f, height*0.6f);
-                        }
-                    }else {
-                        added=false;
-                        batch.draw(Assets.miss, width*0.25f, height*0.6f);
-                    }
-                }else{
-                    if (rhythmGame.isKnock()) {
-                        xPosition=((currentTime-beatTime[beatIndex])/400)*width*0.2f;
-                        batch.draw(Assets.hit, xPosition, 100);
-                        if(added == false) {
-                            song.addscore();
-                            score = "score:"+song.getscore();
+                        }else if (!touchIsenabled && rhythmGame.isKnock()){
                             added = true;
                         }
+                        if (added) {
+                            song.addscore();
+                            score = "score:" + song.getscore();
+                            feedBackXPosition = xPosition;
+                            feedBackYPosition = yPosition;
+                            deltaTime = 0;
+                        }
                     }else {
-                        //added=false;
-=======
-                if(!added) {
-                    xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
-                    yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
-                    batch.draw(Assets.hit, xPosition, yPosition);
-                    if(touchIsenabled && touch && isLeft){
-                        added = true;
-                    }else if (!touchIsenabled && rhythmGame.isKnock()){
-                        added = true;
-                    }
-                    if (added) {
-                        song.addscore();
-                        score = "score:" + song.getscore();
-                        feedBackXPosition = xPosition;
-                        feedBackYPosition = yPosition;
-                        deltaTime = 0;
->>>>>>> origin/master
+                        batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                        batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                        batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                        deltaTime += 10f;
                     }
                 }else {
-                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
-                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
-                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
-                    deltaTime += 10f;
-                }
-            }else {
-<<<<<<< HEAD
-                xPosition=((beatTime[beatIndex]-currentTime)/400)*width*0.2f+width*0.6f;
-                batch.draw(Assets.hit, xPosition, height*0.4f);
-                if(touchIsenabled){
-                    if (touch){
-                        batch.draw(Assets.hiteffect, width*0.55f, height*0.4f);
-                        if(added == false&&!isLeft) {
-                            song.addscore();
-                            score = "score:"+song.getscore();
+                    if(!added) {
+                        xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
+                        yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
+                        batch.draw(Assets.hit, xPosition, yPosition);
+                        if(touchIsenabled && touch && !isLeft){
                             added = true;
-                            batch.draw(Assets.perfect,width*0.7f, height*0.6f);
+                        }else if (!touchIsenabled && rhythmGame.isKnock()){
+                            added = true;
+                        }
+                        if (added) {
+                            song.addscore();
+                            score = "score:" + song.getscore();
+                            feedBackXPosition = xPosition;
+                            feedBackYPosition = yPosition;
+                            deltaTime = 0;
                         }
                     }else {
-                        added=false;
-                        batch.draw(Assets.miss, width*0.6f, height*0.6f);
-=======
-                if(!added) {
-                    xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
-                    yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
-                    batch.draw(Assets.hit, xPosition, yPosition);
-                    if(touchIsenabled && touch && !isLeft){
-                        added = true;
-                      }else if (!touchIsenabled && rhythmGame.isKnock()){
-                        added = true;
->>>>>>> origin/master
+                        batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                        batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                        batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                        deltaTime += 10f;
                     }
-                    if (added) {
-                        song.addscore();
-                        score = "score:" + song.getscore();
-                        feedBackXPosition = xPosition;
-                        feedBackYPosition = yPosition;
-                        deltaTime = 0;
-                    }
-                }else {
-                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
-                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
-                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
-                    deltaTime += 10f;
                 }
+                rhythmGame.setLastUpdate(beatTime[beatIndex]);
+            }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
+                beatIndex++;
+                added = false;
             }
-            rhythmGame.setLastUpdate(beatTime[beatIndex]);
-        }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
-            beatIndex++;
-            added = false;
-        }
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
@@ -229,56 +178,9 @@ public class GameScreen implements Screen{
                 gameover();
                 this.pause();
 
-<<<<<<< HEAD
-                batch.draw(Assets.gameovertable, 350, 80);
-                score = "score: "+song.getscore()+" / " + song.getonset().length;
-                scorefont.draw(batch, score, 2*width/5, 2*height/3);
-                if (song.getscore()<=song.getonset().length/9) {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+60, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+120, height/2);
-                }
-                else if (song.getscore()<=song.getonset().length/6&&song.getscore()>song.getonset().length/9)
-                {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staron, 2*width/5+60, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+120, height/2);
-                }
-                else if (song.getscore()>song.getonset().length/6)
-                {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staron, 2*width/5+60, height/2);
-                    batch.draw(Assets.staron, 2*width/5+120, height/2);
-                }
-            }
-
-            if(beatIndex == this.song.getonset().length){
-                gameover();
-                batch.draw(Assets.gameovertable, 350, 80);
-                score = "score: "+song.getscore()+" / " + song.getonset().length;
-                scorefont.draw(batch, score, 2 * width / 5, 2 * height / 3);
-                if (song.getscore()<=song.getonset().length/9) {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+60, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+120, height/2);
-                }
-                else if (song.getscore()<=song.getonset().length/6&&song.getscore()>song.getonset().length/9)
-                {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staron, 2*width/5+60, height/2);
-                    batch.draw(Assets.staroff, 2*width/5+120, height/2);
-                }
-                else if (song.getscore()>song.getonset().length/6)
-                {
-                    batch.draw(Assets.staron, 2*width/5, height/2);
-                    batch.draw(Assets.staron, 2*width/5+60, height/2);
-                    batch.draw(Assets.staron, 2*width/5+120, height/2);
-                }
-=======
                 batch.draw(Assets.table, 100, 100, width - 200, height - 200);
                 score = "score:" + song.getscore() + " / " + onSetLength;
                 scorefont.draw(batch, score, width / 5, 2 * height / 3);
->>>>>>> origin/master
             }
 //            if (beatIndex == 40) {
 //                gameover();
@@ -375,13 +277,8 @@ public class GameScreen implements Screen{
         song.getSong().stop();
         pauseButton.setVisible(false);
         resumeButton.setVisible(false);
-<<<<<<< HEAD
-        againButton.setPosition(width/3,height/4);
-        homeButton.setPosition(3*width/5,height/4);
-=======
         againButton.setPosition(width / 3, height / 3);
         homeButton.setPosition(3 * width / 5, height / 3);
->>>>>>> origin/master
 
         stage.addActor(againButton);
         stage.addActor(homeButton);
