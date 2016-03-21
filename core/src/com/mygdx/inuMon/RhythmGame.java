@@ -23,7 +23,7 @@ public class RhythmGame extends Game {
 	@Override
 	public void create () {
 		Assets.load();
-		this.song = Assets.recommendSong;
+		this.song = Assets.myLove;
 		Gdx.input.setCatchBackKey(true);
 		menuScreen = new MenuScreen(this);
 		setScreen(menuScreen) ;

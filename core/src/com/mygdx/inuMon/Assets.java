@@ -49,12 +49,14 @@ public class Assets {
     public static Music music0;
     public static Song song0;
     public static Song song1;
-    public static Song recommendSong;
+    public static Song myLove;
+    public static Song imHappy;
     public static Sprite sakura1;
     public static Sprite sakura2;
     public static Sprite sakura3;
     public static Sprite sakura4;
     public static Sprite sakura5;
+    public static Song sakura;
     ///test from here
 
     public static void load(){
@@ -77,15 +79,13 @@ public class Assets {
         sprite_buttonOn = new Sprite(buttonOn);
         sprite_buttonOff = new Sprite(buttonOff);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
+        music =  Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
         music0 = Gdx.audio.newMusic(Gdx.files.internal("YCJZ.mp3"));
         song0 = new Song(music0, 124, 3000);
         song1 = new Song(music, 60, 3000);
-        ////test from here
-        beatInfo = Gdx.files.internal("mylovenormal.txt").readString().split(System.getProperty("line.separator"));
-        beatTime = new int[beatInfo.length];
-        beatTime = getBeatTime(beatInfo);
-        recommendSong = new Song(music,beatTime);
+        myLove = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
+        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("imhappy.mp3")),getBeatTime("imhappy.txt"));
+        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("Sakura.mp3")),getBeatTime("Sakura.txt"));
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));
@@ -107,8 +107,10 @@ public class Assets {
         local = new Texture(Gdx.files.internal("localmusic.png"));
         local_sprite= new Sprite(local);
     }
-    public static int[] getBeatTime(String[] beatInfo){
+    public static int[] getBeatTime(String beatInfoTxt){
         String[] temp;
+        String[] beatInfo = Gdx.files.internal(beatInfoTxt).readString().split(System.getProperty("line.separator"));
+        int[] beatTime = new int[beatInfo.length];
         for(int i=0;i<beatInfo.length;i++){
             temp = beatInfo[i].split(",");
             beatTime[i] = Integer.parseInt(temp[2]);
