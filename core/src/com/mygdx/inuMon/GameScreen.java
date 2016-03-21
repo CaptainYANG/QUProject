@@ -83,18 +83,17 @@ public class GameScreen implements Screen{
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.4f;
-                yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
-                batch.draw(Assets.hit, xPosition, yPosition);
                 if(touchIsenabled){
                     if (touch&&isLeft){
-                        batch.draw(Assets.hit, 10, 100);
                         if(added == false) {
                             song.addscore();
                             score = "score: "+song.getscore();
                             added = true;
                         }
                     }else {
+                        xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.3f;
+                        yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
+                        batch.draw(Assets.hit, xPosition, yPosition);
                         added=false;
                     }
                 }else{
@@ -144,12 +143,12 @@ public class GameScreen implements Screen{
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
-                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_left.getHeight() / 2);
+                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, -10);
                     } else {
-                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, -10);
                     }
                 } else {
-                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
+                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2,-10);
                 }
                 try {
                     Thread.sleep(sleepTime);
