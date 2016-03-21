@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.mygdx.inuMon.Song;
 
 /**
  * Created by yuyin on 2016/1/12.
@@ -23,7 +21,6 @@ public class GameScreen implements Screen{
     RhythmGame rhythmGame;
     SpriteBatch batch;
     Boolean touch = false;
-    int time = 0;
     Boolean isLeft;
     int height;
     int width;
@@ -50,12 +47,15 @@ public class GameScreen implements Screen{
     float yPosition;
     BitmapFont scorefont;
     private Song song;
+    float feedBackXPosition;
+    float feedBackYPosition;
+    float deltaTime;
+    int onSetLength;
 
     //here play from the new obj songs
-
-
     public GameScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
+        rhythmGame.song.getSong().setPosition(0);
         this.song = rhythmGame.song;
         this.song.resetscore();
         batch = new SpriteBatch();
@@ -65,6 +65,7 @@ public class GameScreen implements Screen{
         hitdirection = this.song.getHitDirection();
         touchIsenabled = rhythmGame.isTouchIsEnabled();
         added = false;
+        onSetLength = this.song.getonset().length;
     }
     @Override
     public void render(float delta) {
@@ -89,6 +90,7 @@ public class GameScreen implements Screen{
         rhythmGame.setCurrentTime(currentTime);
         if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
             if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
+<<<<<<< HEAD
                 xPosition=((currentTime-beatTime[beatIndex])/400)*width*0.4f;
                 yPosition= (xPosition*xPosition-0.5f*xPosition-width*0.2f);
                 batch.draw(Assets.hit, xPosition, height*0.4f);
@@ -116,9 +118,34 @@ public class GameScreen implements Screen{
                         }
                     }else {
                         //added=false;
+=======
+                if(!added) {
+                    xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
+                    yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
+                    batch.draw(Assets.hit, xPosition, yPosition);
+                    if(touchIsenabled && touch && isLeft){
+                        added = true;
+                    }else if (!touchIsenabled && rhythmGame.isKnock()){
+                        added = true;
                     }
+                    if (added) {
+                        song.addscore();
+                        score = "score:" + song.getscore();
+                        feedBackXPosition = xPosition;
+                        feedBackYPosition = yPosition;
+                        deltaTime = 0;
+>>>>>>> origin/master
+                    }
+                }else {
+                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                    deltaTime += 10f;
                 }
             }else {
+<<<<<<< HEAD
                 xPosition=((beatTime[beatIndex]-currentTime)/400)*width*0.2f+width*0.6f;
                 batch.draw(Assets.hit, xPosition, height*0.4f);
                 if(touchIsenabled){
@@ -133,18 +160,31 @@ public class GameScreen implements Screen{
                     }else {
                         added=false;
                         batch.draw(Assets.miss, width*0.6f, height*0.6f);
+=======
+                if(!added) {
+                    xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
+                    yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
+                    batch.draw(Assets.hit, xPosition, yPosition);
+                    if(touchIsenabled && touch && !isLeft){
+                        added = true;
+                      }else if (!touchIsenabled && rhythmGame.isKnock()){
+                        added = true;
+>>>>>>> origin/master
                     }
-                }else{
-                    if (rhythmGame.isKnock()) {
-                        batch.draw(Assets.hit, width*0.6f, 100);
-                        if(added == false) {
-                            song.addscore();
-                            score = "score:"+song.getscore();
-                            added = true;
-                        }
-                    }else {
-                        //added=false;
+                    if (added) {
+                        song.addscore();
+                        score = "score:" + song.getscore();
+                        feedBackXPosition = xPosition;
+                        feedBackYPosition = yPosition;
+                        deltaTime = 0;
                     }
+                }else {
+                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                    deltaTime += 10f;
                 }
             }
             rhythmGame.setLastUpdate(beatTime[beatIndex]);
@@ -155,12 +195,12 @@ public class GameScreen implements Screen{
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
-                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_left.getHeight() / 2);
+                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, -10);
                     } else {
-                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, -10);
                     }
                 } else {
-                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
+                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, -10);
                 }
                 try {
                     Thread.sleep(sleepTime);
@@ -170,13 +210,13 @@ public class GameScreen implements Screen{
                 touch = false;
             } else {
                 if (rhythmGame.isKnock()) {
-                    if(beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
-                    }else {
-                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, height / 2 - Assets.sprite_right.getHeight() / 2);
+                    if (beatIndex < hitdirection.length && hitdirection[beatIndex] == 0) {
+                        batch.draw(Assets.sprite_left, (width - Assets.sprite_left.getWidth()) / 2, -10);
+                    } else {
+                        batch.draw(Assets.sprite_right, (width - Assets.sprite_right.getWidth()) / 2, -10);
                     }
                 } else {
-                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
+                    batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, -10);
                 }
                 try {
                     Thread.sleep(sleepTime);
@@ -185,12 +225,11 @@ public class GameScreen implements Screen{
                 }
 
             }
-            if(time<500){
-                time++;
-            }else{
+            if(!this.song.getSong().isPlaying()){
                 gameover();
                 this.pause();
 
+<<<<<<< HEAD
                 batch.draw(Assets.gameovertable, 350, 80);
                 score = "score: "+song.getscore()+" / " + song.getonset().length;
                 scorefont.draw(batch, score, 2*width/5, 2*height/3);
@@ -235,28 +274,43 @@ public class GameScreen implements Screen{
                     batch.draw(Assets.staron, 2*width/5+60, height/2);
                     batch.draw(Assets.staron, 2*width/5+120, height/2);
                 }
+=======
+                batch.draw(Assets.table, 100, 100, width - 200, height - 200);
+                score = "score:" + song.getscore() + " / " + onSetLength;
+                scorefont.draw(batch, score, width / 5, 2 * height / 3);
+>>>>>>> origin/master
             }
-
-        }else{
-            batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, height / 2 - Assets.sprite_corgi.getHeight() / 2);
+//            if (beatIndex == 40) {
+//                gameover();
+//                batch.draw(Assets.table, 100, 100, width - 200, height - 200);
+//                score = "score:" + song.getscore() + " / " + onSetLength;
+//                scorefont.draw(batch, score, width / 5, 2 * height / 3);
+//            }
+        } else {
+            batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, -10);
             pauseButton.setVisible(false);
             resumeButton.setPosition(0, stage.getHeight() - 150);
             stage.addActor(resumeButton);
-
             homeButton.setPosition(resumeButton.getWidth() + 10, stage.getHeight() - 150);
             stage.addActor(homeButton);
+            againButton.setPosition(resumeButton.getWidth() + homeButton.getWidth() + 20, stage.getHeight() - 150);
+            stage.addActor(againButton);
 
-            if(resumeButton.isPressed()){
+            if (resumeButton.isPressed()) {
                 isPaused = false;
                 song.getSong().play();
                 pauseButton.setVisible(true);
                 resumeButton.remove();
                 homeButton.remove();
+                againButton.remove();
             }
-            if(homeButton.isPressed()){
+            if (homeButton.isPressed()) {
                 song.getSong().stop();
                 homeButton.remove();
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
+            }
+            if (againButton.isPressed()) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
 
 
@@ -265,26 +319,29 @@ public class GameScreen implements Screen{
         stage.act();
         stage.draw();
     }
-    public boolean beatShow(float currentMusicTime,int currentIndex){
+
+    public boolean beatShow(float currentMusicTime, int currentIndex) {
         boolean show = false;
-        if(Math.abs(currentMusicTime-beatTime[currentIndex])<200){
+        if (Math.abs(currentMusicTime - beatTime[currentIndex]) < 200) {
             show = true;
-        }else if((currentMusicTime-beatTime[currentIndex])>200){
+        } else if ((currentMusicTime - beatTime[currentIndex]) > 200) {
             currentIndex++;
         }
         return show;
 
     }
-    public void generalUpadate(){
-        if(Gdx.input.isTouched()){
+
+    public void generalUpadate() {
+        if (Gdx.input.isTouched()) {
             touch = true;
-            if(Gdx.input.getX()<Gdx.graphics.getWidth()/2){
+            if (Gdx.input.getX() < Gdx.graphics.getWidth() / 2) {
                 isLeft = true;
-            }else{
+            } else {
                 isLeft = false;
             }
         }
     }
+
     @Override
     public void show() {
         InputMultiplexer impx = new InputMultiplexer();
@@ -314,28 +371,29 @@ public class GameScreen implements Screen{
 
     }
 
-    public void gameover(){
+    public void gameover() {
         song.getSong().stop();
         pauseButton.setVisible(false);
         resumeButton.setVisible(false);
+<<<<<<< HEAD
         againButton.setPosition(width/3,height/4);
         homeButton.setPosition(3*width/5,height/4);
+=======
+        againButton.setPosition(width / 3, height / 3);
+        homeButton.setPosition(3 * width / 5, height / 3);
+>>>>>>> origin/master
 
         stage.addActor(againButton);
         stage.addActor(homeButton);
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
         }
-        if(againButton.isPressed()){
+        if (againButton.isPressed()) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
-
-        };
-
-        if(homeButton.isPressed()){
+        }
+        if (homeButton.isPressed()) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
         }
-
-
 
     }
 

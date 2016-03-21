@@ -64,7 +64,6 @@ public class SelectSongs implements Screen {
         });
         button3.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                rhythmGame.song = Assets.song1;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(rhythmGame));
             }
         });

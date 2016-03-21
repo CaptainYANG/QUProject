@@ -57,6 +57,16 @@ public class Assets {
     public static Texture gameovertable;
     public static Texture staron;
     public static Texture staroff;
+
+    public static Song myLove;
+    public static Song imHappy;
+    public static Sprite sakura1;
+    public static Sprite sakura2;
+    public static Sprite sakura3;
+    public static Sprite sakura4;
+    public static Sprite sakura5;
+    public static Song sakura;
+
     ///test from here
 
     public static void load(){
@@ -66,7 +76,11 @@ public class Assets {
         buttonOn = new Texture(Gdx.files.internal("buttonOn.png"));
         buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         table = new Texture(Gdx.files.internal("table.png"));
+
         background = new Texture(Gdx.files.internal("background.png"));
+
+        background = new Texture(Gdx.files.internal("backgroundSetting.png"));
+
         backgroundMenu = new Texture(Gdx.files.internal("backgroundMenu.jpg"));
         backgroundSetting = new Texture(Gdx.files.internal("backgroundSetting.png"));
         gamename = new Texture(Gdx.files.internal("gamename.gif"));
@@ -86,15 +100,13 @@ public class Assets {
         sprite_buttonOn = new Sprite(buttonOn);
         sprite_buttonOff = new Sprite(buttonOff);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        music = Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
+        music =  Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3"));
         music0 = Gdx.audio.newMusic(Gdx.files.internal("YCJZ.mp3"));
         song0 = new Song(music0, 124, 3000);
         song1 = new Song(music, 60, 3000);
-        ////test from here
-        beatInfo = Gdx.files.internal("mylovenormal.txt").readString().split(System.getProperty("line.separator"));
-        beatTime = new int[beatInfo.length];
-        beatTime = getBeatTime(beatInfo);
-        recommendSong = new Song(music,beatTime);
+        myLove = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
+        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("imhappy.mp3")),getBeatTime("imhappy.txt"));
+        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("Sakura.mp3")),getBeatTime("Sakura.txt"));
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));
@@ -103,6 +115,11 @@ public class Assets {
         sprite_home = new Sprite(home);
         again =new Texture(Gdx.files.internal("again.png"));
         sprite_again = new Sprite(again);
+        sakura1 = new Sprite(new Texture(Gdx.files.internal("sakura1.png")));
+        sakura2 = new Sprite(new Texture(Gdx.files.internal("sakura2.png")));
+        sakura3 = new Sprite(new Texture(Gdx.files.internal("sakura3.png")));
+        sakura4 = new Sprite(new Texture(Gdx.files.internal("sakura4.png")));
+        sakura5 = new Sprite(new Texture(Gdx.files.internal("sakura5.png")));
 
         recommend = new Texture(Gdx.files.internal("recommendation.png"));
         recommend_sprite = new Sprite(recommend);
@@ -111,8 +128,10 @@ public class Assets {
         local = new Texture(Gdx.files.internal("localmusic.png"));
         local_sprite= new Sprite(local);
     }
-    public static int[] getBeatTime(String[] beatInfo){
+    public static int[] getBeatTime(String beatInfoTxt){
         String[] temp;
+        String[] beatInfo = Gdx.files.internal(beatInfoTxt).readString().split(System.getProperty("line.separator"));
+        int[] beatTime = new int[beatInfo.length];
         for(int i=0;i<beatInfo.length;i++){
             temp = beatInfo[i].split(",");
             beatTime[i] = Integer.parseInt(temp[2]);

@@ -32,7 +32,6 @@ public class Song {
         this.score++;
 
     };
-
     //setup game points
     public int[] getonset(){
         if(onset!=null){
@@ -49,8 +48,8 @@ public class Song {
     };
     public int[] getHitDirection(){
         Random random = new Random();
-        direction = new int[60];
-        for (int i=0; i<60; i++){
+        direction = new int[onset.length];
+        for (int i=0; i<onset.length; i++){
             direction[i] = random.nextInt(2);
         }
         return direction;

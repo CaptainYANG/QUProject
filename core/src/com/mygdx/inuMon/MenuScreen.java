@@ -57,7 +57,7 @@ public class MenuScreen implements Screen{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.setTouchIsEnabled(touchIsEnabled);
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.GameScreen(rhythmGame));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new com.mygdx.inuMon.RecommendScreen(rhythmGame));
             }
         });
         myMusic.addListener(new ClickListener() {
