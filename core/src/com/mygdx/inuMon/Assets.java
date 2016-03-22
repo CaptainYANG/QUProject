@@ -58,6 +58,13 @@ public class Assets {
     public static Texture staron;
     public static Texture staroff;
 
+    public static Texture songlist1;
+    public static Sprite sprite_songlist1;
+    public static Texture songlist2;
+    public static Sprite sprite_songlist2;
+    public static Texture songlist3;
+    public static Sprite sprite_songlist3;
+
     public static Song myLove;
     public static Song imHappy;
     public static Sprite sakura1;
@@ -105,8 +112,8 @@ public class Assets {
         song0 = new Song(music0, 124, 3000);
         song1 = new Song(music, 60, 3000);
         myLove = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
-        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("imhappy.mp3")),getBeatTime("imhappy.txt"));
-        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("Sakura.mp3")),getBeatTime("Sakura.txt"));
+        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
+        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));
@@ -115,11 +122,18 @@ public class Assets {
         sprite_home = new Sprite(home);
         again =new Texture(Gdx.files.internal("again.png"));
         sprite_again = new Sprite(again);
-        sakura1 = new Sprite(new Texture(Gdx.files.internal("sakura1.png")));
-        sakura2 = new Sprite(new Texture(Gdx.files.internal("sakura2.png")));
-        sakura3 = new Sprite(new Texture(Gdx.files.internal("sakura3.png")));
-        sakura4 = new Sprite(new Texture(Gdx.files.internal("sakura4.png")));
-        sakura5 = new Sprite(new Texture(Gdx.files.internal("sakura5.png")));
+
+        songlist1 =new Texture(Gdx.files.internal("songlist1.png"));
+        sprite_songlist1 = new Sprite(songlist1);
+        songlist2 =new Texture(Gdx.files.internal("songlist2.png"));
+        sprite_songlist2 = new Sprite(songlist2);
+        songlist3 =new Texture(Gdx.files.internal("songlist3.png"));
+        sprite_songlist3 = new Sprite(songlist3);
+        sakura1 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
+        sakura2 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
+        sakura3 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
+        sakura4 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
+        sakura5 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
 
         recommend = new Texture(Gdx.files.internal("recommendation.png"));
         recommend_sprite = new Sprite(recommend);
