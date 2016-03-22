@@ -54,6 +54,7 @@ public class Assets {
     public static Texture perfect;
     public static Texture hiteffect;
     public static Texture scorebackground;
+    public static Texture gamebackground;
     public static Texture gameovertable;
     public static Texture staron;
     public static Texture staroff;
@@ -64,6 +65,8 @@ public class Assets {
     public static Sprite sprite_songlist2;
     public static Texture songlist3;
     public static Sprite sprite_songlist3;
+    public static Texture okbutton;
+    public static Sprite sprite_okbutton;
 
     public static Song myLove;
     public static Song imHappy;
@@ -84,7 +87,7 @@ public class Assets {
         buttonOff = new Texture(Gdx.files.internal("buttonOff.png"));
         table = new Texture(Gdx.files.internal("table.png"));
 
-        background = new Texture(Gdx.files.internal("background.png"));
+        gamebackground = new Texture(Gdx.files.internal("background.png"));
 
         background = new Texture(Gdx.files.internal("backgroundSetting.png"));
 
@@ -129,6 +132,8 @@ public class Assets {
         sprite_songlist2 = new Sprite(songlist2);
         songlist3 =new Texture(Gdx.files.internal("songlist3.png"));
         sprite_songlist3 = new Sprite(songlist3);
+        okbutton =new Texture(Gdx.files.internal("okbutton.png"));
+        sprite_okbutton = new Sprite(okbutton);
         sakura1 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
         sakura2 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
         sakura3 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
