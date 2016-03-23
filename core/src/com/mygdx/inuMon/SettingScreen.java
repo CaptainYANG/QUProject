@@ -25,7 +25,8 @@ public class SettingScreen implements Screen{
     private SpriteDrawable buttonOn = new SpriteDrawable(Assets.sprite_buttonOn);
     private SpriteDrawable buttonOff = new SpriteDrawable(Assets.sprite_buttonOff);
     private ImageButton touchEnable = new ImageButton(buttonOn,buttonOff,buttonOff);
-    private TextButton ok = new TextButton("OK", Assets.skin);
+    private SpriteDrawable okbutton = new SpriteDrawable(Assets.sprite_okbutton);
+    private ImageButton ok = new ImageButton(okbutton);
     private BitmapFont settingfont = new BitmapFont();
     private boolean touch = true;
     int height;

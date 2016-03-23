@@ -73,7 +73,7 @@ public class GameScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         generalUpadate();
         batch.begin();
-        batch.draw(Assets.background, 0, 0, width, height);
+        batch.draw(Assets.gamebackground, 0, 0, width, height);
         //scorefont = new BitmapFont(Gdx.files.internal("font.fnt"));
         scorefont.draw(batch, score, width - 450, height - 10);
 
@@ -82,65 +82,74 @@ public class GameScreen implements Screen{
                 isPaused=true;
                 this.pause();
             }
-        currentTime =  song.getSong().getPosition()*1000;
-        rhythmGame.setCurrentTime(currentTime);
-        if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
-            if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
-                if(!added) {
-                    xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
-                    yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
-                    batch.draw(Assets.hit, xPosition, yPosition);
-                    if(touchIsenabled && touch && isLeft){
-                        added = true;
-                    }else if (!touchIsenabled && rhythmGame.isKnock()){
-                        added = true;
-                    }
-                    if (added) {
-                        song.addscore();
-                        score = "score:" + song.getscore();
-                        feedBackXPosition = xPosition;
-                        feedBackYPosition = yPosition;
-                        deltaTime = 0;
-                    }
-                }else {
-                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
-                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
-                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
-                    deltaTime += 10f;
-                }
-            }else {
-                if(!added) {
-                    xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
-                    yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
-                    batch.draw(Assets.hit, xPosition, yPosition);
-                    if(touchIsenabled && touch && !isLeft){
-                        added = true;
-                      }else if (!touchIsenabled && rhythmGame.isKnock()){
-                        added = true;
-                    }
-                    if (added) {
-                        song.addscore();
-                        score = "score:" + song.getscore();
-                        feedBackXPosition = xPosition;
-                        feedBackYPosition = yPosition;
-                        deltaTime = 0;
+            currentTime =  song.getSong().getPosition()*1000;
+            rhythmGame.setCurrentTime(currentTime);
+            if(beatIndex<song.getonset().length&&Math.abs(currentTime-beatTime[beatIndex])<=300){
+                if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
+                    if(!added) {
+                        xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
+                        yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
+                        batch.draw(Assets.hit, xPosition, yPosition);
+                        if(touchIsenabled && touch && isLeft){
+                            added = true;
+                        }else if (!touchIsenabled && rhythmGame.isKnock()){
+                            added = true;
+                        }
+                        if (added) {
+                            song.addscore();
+                            score = "score:" + song.getscore();
+                            feedBackXPosition = xPosition;
+                            feedBackYPosition = yPosition;
+                            deltaTime = 0;
+                            batch.draw(Assets.perfect, width*0.25f, height*0.5f);
+                        }
+                        else{
+                            batch.draw(Assets.miss, width*0.25f, height*0.5f);
+                        }
+
+                    }else {
+                        batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                        batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                        batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                        deltaTime += 10f;
                     }
                 }else {
-                    batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
-                    batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
-                    batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
-                    batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
-                    deltaTime += 10f;
+                    if(!added) {
+                        xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
+                        yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
+                        batch.draw(Assets.hit, xPosition, yPosition);
+                        if(touchIsenabled && touch && !isLeft){
+                            added = true;
+                        }else if (!touchIsenabled && rhythmGame.isKnock()){
+                            added = true;
+                        }
+                        if (added) {
+                            song.addscore();
+                            score = "score:" + song.getscore();
+                            feedBackXPosition = xPosition;
+                            feedBackYPosition = yPosition;
+                            deltaTime = 0;
+                            batch.draw(Assets.perfect,width*0.7f, height*0.5f);
+                        }
+                        else{
+                            batch.draw(Assets.miss, width*0.6f, height*0.5f);
+                        }
+                    }else {
+                        batch.draw(Assets.sakura1,feedBackXPosition+deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura2,feedBackXPosition-deltaTime,feedBackYPosition+deltaTime);
+                        batch.draw(Assets.sakura3,feedBackXPosition-deltaTime,feedBackYPosition-deltaTime*0.5f);
+                        batch.draw(Assets.sakura4,feedBackXPosition,feedBackYPosition-deltaTime);
+                        batch.draw(Assets.sakura5,feedBackXPosition+deltaTime,feedBackYPosition);
+                        deltaTime += 10f;
+                    }
                 }
+                rhythmGame.setLastUpdate(beatTime[beatIndex]);
+            }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
+                beatIndex++;
+                added = false;
             }
-            rhythmGame.setLastUpdate(beatTime[beatIndex]);
-        }else if(beatIndex<song.getonset().length&&currentTime-beatTime[beatIndex]>150){
-            beatIndex++;
-            added = false;
-        }
             if (touchIsenabled) {
                 if (touch) {
                     if (isLeft) {
@@ -178,9 +187,31 @@ public class GameScreen implements Screen{
                 gameover();
                 this.pause();
 
-                batch.draw(Assets.table, 100, 100, width - 200, height - 200);
+                /*batch.draw(Assets.table, 100, 100, width - 200, height - 200);
                 score = "score:" + song.getscore() + " / " + onSetLength;
                 scorefont.draw(batch, score, width / 5, 2 * height / 3);
+                */
+                batch.draw(Assets.gameovertable, 350, 80);
+                score = "score: "+song.getscore()+" / " + song.getonset().length;
+                scorefont.draw(batch, score, width/3, 2*height/3);
+                if (song.getscore()<=song.getonset().length/3) {
+                    batch.draw(Assets.staron, 2*width/5, height/2);
+                    batch.draw(Assets.staroff, 2*width/5+80, height/2);
+                    batch.draw(Assets.staroff, 2*width/5+160, height/2);
+                }
+                else if (song.getscore()<=2*song.getonset().length/3&&song.getscore()>song.getonset().length/3)
+                {
+                    batch.draw(Assets.staron, 2*width/5, height/2);
+                    batch.draw(Assets.staron, 2*width/5+80, height/2);
+                    batch.draw(Assets.staroff, 2*width/5+160, height/2);
+                }
+                else if (song.getscore() > song.getonset().length/3)
+                {
+                    batch.draw(Assets.staron, 2*width/5, height/2);
+                    batch.draw(Assets.staron, 2*width/5+80, height/2);
+                    batch.draw(Assets.staron, 2*width/5+160, height/2);
+                }
+
             }
 //            if (beatIndex == 40) {
 //                gameover();
@@ -277,8 +308,8 @@ public class GameScreen implements Screen{
         song.getSong().stop();
         pauseButton.setVisible(false);
         resumeButton.setVisible(false);
-        againButton.setPosition(width / 3, height / 3);
-        homeButton.setPosition(3 * width / 5, height / 3);
+        againButton.setPosition(2*width / 5, height / 3);
+        homeButton.setPosition( width / 2, height / 3);
 
         stage.addActor(againButton);
         stage.addActor(homeButton);

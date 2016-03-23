@@ -12,7 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 /**
  * Created by yuyin on 2016/1/27.
  */
@@ -29,6 +30,15 @@ public class RecommendScreen implements Screen{
     private Boolean tableflag;
     private Boolean isPaused;
 
+    private SpriteDrawable songlist1 = new SpriteDrawable(Assets.sprite_songlist1);
+    private SpriteDrawable songlist2 = new SpriteDrawable(Assets.sprite_songlist2);
+    private SpriteDrawable songlist3 = new SpriteDrawable(Assets.sprite_songlist3);
+    private ImageButton songlist_1 = new ImageButton(songlist1);
+    private ImageButton songlist_2 = new ImageButton(songlist2);
+    private ImageButton songlist_3 = new ImageButton(songlist3);
+
+
+
     public RecommendScreen(RhythmGame rhythmGame){
         this.rhythmGame = rhythmGame;
         this.recommendScreen = this;
@@ -44,48 +54,50 @@ public class RecommendScreen implements Screen{
     @Override
     public void show() {
 
-        TextButton button1 = new TextButton("Sakura", Assets.skin);
+       /* TextButton button1 = new TextButton("Sakura", Assets.skin);
         TextButton button2 = new TextButton("my love", Assets.skin);
         TextButton button3 = new TextButton("I'm happy", Assets.skin);
+        */
 
 
-        button1.addListener(new ClickListener() {
+       songlist_1.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.sakura;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
 
-        button2.addListener(new ClickListener() {
+        songlist_2.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.myLove;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
-        button3.addListener(new ClickListener() {
+        songlist_3.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 rhythmGame.song = Assets.imHappy;
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameScreen(rhythmGame));
             }
         });
 
-        button1.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        button2.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
-        button3.setSize(stage.getWidth() * 0.4f, stage.getHeight() * 0.10f);
+        songlist_1.setSize(stage.getWidth() , stage.getHeight() );
+        songlist_2.setSize(stage.getWidth() , stage.getHeight() );
+        songlist_3.setSize(stage.getWidth() , stage.getHeight() );
+
         table = new Table();
         table.setPosition(width/2,height/2);
         table.top().center();
         //table.background((Drawable) Assets.table);
-        table.row().height(70);
-        table.add(button1).width(300).pad(10);
+        table.row().height(150);
+        table.add(songlist_1).width(600).pad(30);
         //table.add(nameText).width(100);
-        table.row().height(70);
-        table.add(button2).width(300).pad(10);
+        table.row().height(150);
+        table.add(songlist_2).width(600).pad(30);
         //table.add(addressText).width(100);
         table.setVisible(true);
         //table.setPosition(50, stage.getHeight());
-        table.row().height(70);
-        table.add(button3).width(300).pad(10);
+        table.row().height(150);
+        table.add(songlist_3).width(600).pad(30);
 
 
         stage.addActor(table);
