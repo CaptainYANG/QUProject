@@ -46,6 +46,8 @@ public class Assets {
     public static Sprite setting_sprite;
     public static Texture local;
     public static Sprite local_sprite;
+    public static Texture guide;
+    public static Sprite sprite_guide;
     public static Music music0;
     public static Song song0;
     public static Song song1;
@@ -58,6 +60,10 @@ public class Assets {
     public static Texture gameovertable;
     public static Texture staron;
     public static Texture staroff;
+    public static Texture guide1;
+    public static Texture guide2;
+    public static Sprite sprite_guide1;
+    public static Sprite sprite_guide2;
 
     public static Texture songlist1;
     public static Sprite sprite_songlist1;
@@ -102,6 +108,7 @@ public class Assets {
         gameovertable = new Texture(Gdx.files.internal("gameovertable.png"));
         staron = new Texture(Gdx.files.internal("staron.png"));
         staroff = new Texture(Gdx.files.internal("staroff.png"));
+
         sprite_corgi = new Sprite(texture_corgi);
         sprite_left = new Sprite(texture_left);
         sprite_right = new Sprite(texture_right);
@@ -115,8 +122,8 @@ public class Assets {
         song0 = new Song(music0, 124, 3000);
         song1 = new Song(music, 60, 3000);
         myLove = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
-        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
-        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("mylove.mp3")),getBeatTime("mylovenormal.txt"));
+        imHappy = new Song(Gdx.audio.newMusic(Gdx.files.internal("imhappy.mp3")),getBeatTime("imhappy.txt"));
+        sakura =  new Song(Gdx.audio.newMusic(Gdx.files.internal("Sakura.mp3")),getBeatTime("Sakura.txt"));
         resume =new Texture(Gdx.files.internal("resume.png"));
         sprite_resume = new Sprite(resume);
         pause =new Texture(Gdx.files.internal("pause.png"));
@@ -125,6 +132,12 @@ public class Assets {
         sprite_home = new Sprite(home);
         again =new Texture(Gdx.files.internal("again.png"));
         sprite_again = new Sprite(again);
+        guide =new Texture(Gdx.files.internal("guideicon.png"));
+        sprite_guide = new Sprite(guide);
+        guide1 =new Texture(Gdx.files.internal("guide1.png"));
+        sprite_guide1 = new Sprite(guide1);
+        guide2 =new Texture(Gdx.files.internal("guide2.png"));
+        sprite_guide2 = new Sprite(guide2);
 
         songlist1 =new Texture(Gdx.files.internal("songlist1.png"));
         sprite_songlist1 = new Sprite(songlist1);
@@ -134,11 +147,11 @@ public class Assets {
         sprite_songlist3 = new Sprite(songlist3);
         okbutton =new Texture(Gdx.files.internal("okbutton.png"));
         sprite_okbutton = new Sprite(okbutton);
-        sakura1 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
-        sakura2 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
-        sakura3 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
-        sakura4 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
-        sakura5 = new Sprite(new Texture(Gdx.files.internal("hit.png")));
+        sakura1 = new Sprite(new Texture(Gdx.files.internal("sakura1.png")));
+        sakura2 = new Sprite(new Texture(Gdx.files.internal("sakura2.png")));
+        sakura3 = new Sprite(new Texture(Gdx.files.internal("sakura3.png")));
+        sakura4 = new Sprite(new Texture(Gdx.files.internal("sakura4.png")));
+        sakura5 = new Sprite(new Texture(Gdx.files.internal("sakura5.png")));
 
         recommend = new Texture(Gdx.files.internal("recommendation.png"));
         recommend_sprite = new Sprite(recommend);

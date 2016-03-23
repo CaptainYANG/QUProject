@@ -88,7 +88,7 @@ public class GameScreen implements Screen{
                 if (beatIndex<hitdirection.length&&hitdirection[beatIndex]==0){
                     if(!added) {
                         xPosition=((currentTime-beatTime[beatIndex])/300)*width*0.1f+width*0.15f;
-                        yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.2f;
+                        yPosition= -xPosition*xPosition*0.0023f+0.3f*xPosition+width*0.25f;
                         batch.draw(Assets.hit, xPosition, yPosition);
                         if(touchIsenabled && touch && isLeft){
                             added = true;
@@ -118,7 +118,7 @@ public class GameScreen implements Screen{
                 }else {
                     if(!added) {
                         xPosition=((beatTime[beatIndex]-currentTime)/300)*width*0.1f+width*0.7f;
-                        yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.55f;
+                        yPosition= -xPosition*xPosition*0.000625f+1.625f*xPosition-width*0.4f;
                         batch.draw(Assets.hit, xPosition, yPosition);
                         if(touchIsenabled && touch && !isLeft){
                             added = true;
@@ -131,7 +131,7 @@ public class GameScreen implements Screen{
                             feedBackXPosition = xPosition;
                             feedBackYPosition = yPosition;
                             deltaTime = 0;
-                            batch.draw(Assets.perfect,width*0.7f, height*0.5f);
+                            batch.draw(Assets.perfect,width*0.6f, height*0.5f);
                         }
                         else{
                             batch.draw(Assets.miss, width*0.6f, height*0.5f);
@@ -193,7 +193,7 @@ public class GameScreen implements Screen{
                 */
                 batch.draw(Assets.gameovertable, 350, 80);
                 score = "score: "+song.getscore()+" / " + song.getonset().length;
-                scorefont.draw(batch, score, width/3, 2*height/3);
+                scorefont.draw(batch, score, width / 3, 2 * height / 3);
                 if (song.getscore()<=song.getonset().length/3) {
                     batch.draw(Assets.staron, 2*width/5, height/2);
                     batch.draw(Assets.staroff, 2*width/5+80, height/2);
@@ -213,12 +213,30 @@ public class GameScreen implements Screen{
                 }
 
             }
-//            if (beatIndex == 40) {
-//                gameover();
-//                batch.draw(Assets.table, 100, 100, width - 200, height - 200);
-//                score = "score:" + song.getscore() + " / " + onSetLength;
-//                scorefont.draw(batch, score, width / 5, 2 * height / 3);
-//            }
+           if (beatIndex == 50) {
+                gameover();
+               this.pause();
+               batch.draw(Assets.gameovertable, 350, 80);
+               score = "score: "+song.getscore()+" / " + song.getonset().length;
+               scorefont.draw(batch, score, width/3, 2*height/3);
+               if (song.getscore()<=song.getonset().length/3) {
+                   batch.draw(Assets.staron, 2*width/5, height/2);
+                   batch.draw(Assets.staroff, 2*width/5+80, height/2);
+                   batch.draw(Assets.staroff, 2*width/5+160, height/2);
+               }
+               else if (song.getscore()<=2*song.getonset().length/3&&song.getscore()>song.getonset().length/3)
+               {
+                   batch.draw(Assets.staron, 2*width/5, height/2);
+                   batch.draw(Assets.staron, 2*width/5+80, height/2);
+                   batch.draw(Assets.staroff, 2*width/5+160, height/2);
+               }
+               else if (song.getscore() > song.getonset().length/3)
+               {
+                   batch.draw(Assets.staron, 2*width/5, height/2);
+                   batch.draw(Assets.staron, 2*width/5+80, height/2);
+                   batch.draw(Assets.staron, 2*width/5+160, height/2);
+               }
+            }
         } else {
             batch.draw(Assets.sprite_corgi, (width - Assets.sprite_corgi.getWidth()) / 2, -10);
             pauseButton.setVisible(false);

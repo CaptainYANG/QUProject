@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -35,9 +34,17 @@ public class MenuScreen implements Screen{
     private SpriteDrawable setting = new SpriteDrawable(Assets.setting_sprite);
     private SpriteDrawable localmusic = new SpriteDrawable(Assets.local_sprite);
     private SpriteDrawable recommendation = new SpriteDrawable(Assets.recommend_sprite);
+    private SpriteDrawable guide = new SpriteDrawable(Assets.sprite_guide);
+    private SpriteDrawable guide1 = new SpriteDrawable(Assets.sprite_guide1);
+    private SpriteDrawable guide2 = new SpriteDrawable(Assets.sprite_guide2);
     private ImageButton settings = new ImageButton(setting);
     private ImageButton myMusic = new ImageButton(localmusic);
     private ImageButton recommend = new ImageButton(recommendation);
+    private ImageButton guidebutton = new ImageButton(guide);
+    private ImageButton guide1button = new ImageButton(guide1);
+    private ImageButton guide2button = new ImageButton(guide2);
+
+
 
     int time = 0;
     public MenuScreen(com.mygdx.inuMon.RhythmGame rhythmGame){
@@ -75,18 +82,29 @@ public class MenuScreen implements Screen{
 
             }
         });
+
+        guidebutton.setPosition(0, height - 150);
+        guidebutton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new GuideScreen1(rhythmGame));
+
+            }
+        });
+
         /**
          * layout of menu buttons
          */
         recommend.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
-        recommend.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.5f);
+        recommend.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight() * 0.5f);
         myMusic.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
-        myMusic.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.35f);
+        myMusic.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight() * 0.35f);
         settings.setSize(stage.getWidth() * buttonWidth, stage.getHeight() * buttonHeight);
-        settings.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight()*0.2f);
+        settings.setPosition(stage.getWidth() * buttonPositionWidth, stage.getHeight() * 0.2f);
         stage.addActor(recommend);
         stage.addActor(myMusic);
         stage.addActor(settings);
+        stage.addActor(guidebutton);
         InputMultiplexer impx = new InputMultiplexer();
         impx.addProcessor(stage);
         Gdx.input.setInputProcessor(impx);
