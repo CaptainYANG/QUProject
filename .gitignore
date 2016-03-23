@@ -67,3 +67,4 @@ build/
 android/src/obj/local/arm64-v8a/objs/MusicToOnset/Superpowered/SuperpoweredAndroidAudioIO.o
 *.d
 *.so
+android/build.gradle
